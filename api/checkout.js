@@ -3,7 +3,7 @@
 //
 //   CARDCOM_TERMINAL   מספר מסוף        (required)
 //   CARDCOM_API_NAME   שם משתמש ל-API   (required)
-//   WORKSHOP_PRICE_ILS total incl. VAT   (default 696.20 = 590 + 18%)
+//   WORKSHOP_PRICE_ILS total incl. VAT   (default 590)
 //   CARDCOM_OPERATION  ChargeAndCreateDocument | ChargeOnly
 //   SITE_URL           canonical https origin, e.g. https://workshop.gr8minds.co.il
 
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
   const email = clean(body.email, 120);
   const phone = clean(body.phone, 30);
 
-  const amount = Number(process.env.WORKSHOP_PRICE_ILS || 696.2);
+  const amount = Number(process.env.WORKSHOP_PRICE_ILS || 590);
   if (!Number.isFinite(amount) || amount <= 0) {
     return res.status(500).json({ error: 'bad_price' });
   }
