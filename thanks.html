@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>נרשמתם לסדנה | GR8MINDS</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F0F1E; --muted:#5A5A6E; --soft:#8B8B9E;
+    --pink:#FF1F8E; --teal:#3BC4CC; --gold:#F5C842;
+    --tint-hero:#FFF8FB; --white:#FFFFFF; --line:#ECECF2;
+    --grad:linear-gradient(135deg,#FF1F8E 0%,#F5C842 100%);
+    --shadow:0 30px 60px -20px rgba(15,15,30,.12);
+    --disp:"Space Grotesk","Heebo",system-ui,sans-serif;
+    --body:"Heebo","Space Grotesk",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--tint-hero);color:var(--ink);
+    font-family:var(--body);font-size:18px;line-height:1.7;
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    padding:28px;-webkit-font-smoothing:antialiased;
+  }
+  .card{
+    background:var(--white);border-radius:26px;padding:52px 40px 40px;
+    width:min(560px,100%);box-shadow:var(--shadow);text-align:center;
+  }
+  .mark{
+    width:70px;height:70px;border-radius:50%;background:var(--grad);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 24px;
+    color:var(--white);font-size:2rem;line-height:1;
+  }
+  h1{font-family:var(--disp);font-size:2rem;margin:0 0 10px;line-height:1.25}
+  .lead{color:var(--muted);margin:0 0 30px}
+  .facts{
+    border:1.5px solid var(--line);border-radius:18px;padding:22px 24px;
+    text-align:start;margin-bottom:26px;
+  }
+  .facts dl{margin:0;display:grid;grid-template-columns:auto 1fr;
+    gap:10px 18px;align-items:baseline}
+  .facts dt{color:var(--soft);font-size:.85rem;font-weight:500}
+  .facts dd{margin:0;font-weight:700;font-size:.98rem}
+  .next{
+    background:var(--tint-hero);border-radius:16px;padding:20px 24px;
+    text-align:start;font-size:.94rem;color:var(--muted);
+  }
+  .next strong{color:var(--ink);display:block;margin-bottom:8px;
+    font-family:var(--disp);font-size:1rem}
+  .next ul{margin:0;padding-inline-start:20px}
+  .next li{margin-bottom:6px}
+  .foot{margin:26px 0 0;font-size:.85rem;color:var(--soft)}
+  .foot a{color:var(--pink);font-weight:500}
+  @media (max-width:520px){
+    .card{padding:38px 24px 30px}
+    h1{font-size:1.6rem}
+    .facts dl{grid-template-columns:1fr;gap:2px 0}
+    .facts dd{margin-bottom:12px}
+  }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="mark" aria-hidden="true">✓</div>
+    <h1>המקום שלכם שמור</h1>
+    <p class="lead">התשלום התקבל. חשבונית ואישור הרשמה נשלחים אליכם למייל.</p>
+
+    <div class="facts">
+      <dl>
+        <dt>מתי</dt><dd>רביעי, 2 בספטמבר 2026, 10:00 עד 12:00</dd>
+        <dt>איפה</dt><dd>אריה שנקר 1, הרצליה</dd>
+        <dt>מה מביאים</dt><dd>לפטופ טעון</dd>
+      </dl>
+    </div>
+
+    <div class="next">
+      <strong>לפני שנפגשים</strong>
+      <ul>
+        <li>נשלח אליכם מייל עם הנחיות לחיבור Gmail ו-Calendar, כדאי לעשות את זה מראש.</li>
+        <li>מגיעים עם חשבון גוגל שאתם באמת עובדים איתו, שם האייג׳נטים ירוצו.</li>
+        <li>ביטול עד 48 שעות לפני מזכה בהחזר מלא.</li>
+      </ul>
+    </div>
+
+    <p class="foot">
+      שאלה לפני הסדנה? <a href="mailto:ai@gr8minds.co.il">ai@gr8minds.co.il</a>
+    </p>
+  </main>
+</body>
+</html>

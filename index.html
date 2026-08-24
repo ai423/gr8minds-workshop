@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<!--
+================================================================================
+GR8MINDS · דף נחיתה לסדנת האייג'נטים · index.html
+================================================================================
+
+מה זה
+  דף נחיתה עצמאי אחד. כל ה-CSS מוטמע. אין build ואין framework.
+  התלות החיצונית היחידה היא Google Fonts (Heebo + Space Grotesk).
+
+פרטי האירוע (מקור אמת יחיד, לעדכן כאן אם משתנה)
+  מוצר   : סדנת שלושה אייג'נטים, קוקפיט / ראדאר / עוגן
+  תאריך  : רביעי, 2 בספטמבר 2026
+  שעה    : 10:00 עד 12:00
+  מיקום  : אריה שנקר 1, הרצליה
+  מחיר   : 590 ILS לפני מע"מ (נגבה 696.20 כולל מע"מ, ראו WORKSHOP_PRICE_ILS)
+  מלאי   : 12 מקומות
+
+--------------------------------------------------------------------------------
+מבנה הפרויקט
+--------------------------------------------------------------------------------
+  index.html                הדף הזה
+  thanks.html               עמוד תודה, אליו קארדקום מחזיר אחרי תשלום מוצלח
+  api/checkout.js           יוצר דף תשלום בקארדקום ומפנה אליו
+  api/cardcom-webhook.js    מקבל הודעת תשלום מקארדקום ומאמת אותה מול השרת
+  vercel.json               כותרות אבטחה, cleanUrls
+  .env.example              רשימת משתני הסביבה הדרושים
+
+--------------------------------------------------------------------------------
+הסליקה
+--------------------------------------------------------------------------------
+  ארבעת כפתורי ההרשמה מסומנים ב-data-checkout ומצביעים על /api/checkout.
+  לחיצה פותחת מודאל שאוסף שם, אימייל וטלפון, שולח ל-/api/checkout,
+  והפונקציה יוצרת עסקת LowProfile בקארדקום ומפנה לדף התשלום המאובטח שלה.
+  בלי JavaScript הקישור עדיין עובד, פשוט בלי פרטי חשבונית.
+
+  הפרטים של קארדקום נשמרים כמשתני סביבה ב-Vercel, לא בקוד:
+
+    CARDCOM_TERMINAL       מספר מסוף
+    CARDCOM_API_NAME       שם משתמש ל-API
+    WORKSHOP_PRICE_ILS     סכום כולל מע"מ, ברירת מחדל 696.20
+    CARDCOM_OPERATION      ChargeAndCreateDocument או ChargeOnly
+    SITE_URL               הדומיין הסופי, בלי לוכסן בסוף
+
+  עד שמגדירים את השניים הראשונים, /api/checkout מחזיר 503 והמודאל
+  מציג הודעה מסודרת. שאר הדף עובד כרגיל.
+
+--------------------------------------------------------------------------------
+מלאי המקומות
+--------------------------------------------------------------------------------
+  הדף סטטי ולא סופר מקומות. להגדיר בקארדקום הגבלת כמות של 12 למוצר,
+  או ידנית: כשנמכרים 12, להחליף את הכפתורים בטקסט "הסדנה מלאה".
+
+--------------------------------------------------------------------------------
+לפני שמעלים לאוויר
+--------------------------------------------------------------------------------
+  [ ] להגדיר את משתני הסביבה ב-Vercel
+  [ ] לבצע עסקת בדיקה אחת מקצה לקצה ולוודא שהחשבונית יוצאת
+  [ ] להוסיף תמונת og:image, 1200x630, לשיתוף בוואטסאפ ובלינקדאין
+  [ ] לוודא שהעמוד נפתח נכון במובייל, זה מאיפה יגיע רוב התנועה
+  [ ] להוסיף Google Analytics או Plausible אם רוצים למדוד המרה
+================================================================================
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>שלושה אייג'נטים בשעתיים | סדנה פתוחה של GR8MINDS</title>
+<meta name="description" content="סדנה פתוחה של שעתיים שבה כל משתתף בונה שלושה אייג'נטים עובדים: קוקפיט, ראדאר, עוגן. רביעי 2 בספטמבר, אריה שנקר 1 הרצליה, 12 מקומות.">
+<link rel="canonical" href="https://gr8minds.co.il/workshop">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="שעתיים. שלושה כלים. אפס קוד.">
+<meta property="og:description" content="סדנה פתוחה של שעתיים שבה כל משתתף בונה שלושה אייג'נטים עובדים: קוקפיט, ראדאר, עוגן. רביעי 2 בספטמבר, אריה שנקר 1 הרצליה, 12 מקומות.">
+<meta property="og:site_name" content="GR8MINDS">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationEvent",
+  "name": "שלושה אייג'נטים בשעתיים",
+  "description": "סדנה פתוחה של שעתיים שבה כל משתתף בונה שלושה אייג'נטים עובדים: קוקפיט, ראדאר, עוגן. רביעי 2 בספטמבר, אריה שנקר 1 הרצליה, 12 מקומות.",
+  "startDate": "2026-09-02T10:00:00+03:00",
+  "endDate": "2026-09-02T12:00:00+03:00",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "maximumAttendeeCapacity": 12,
+  "location": {
+    "@type": "Place",
+    "name": "אריה שנקר 1, הרצליה",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "אריה שנקר 1",
+      "addressLocality": "הרצליה",
+      "addressCountry": "IL"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "GR8MINDS",
+    "url": "https://gr8minds.co.il",
+    "email": "ai@gr8minds.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "590",
+    "priceCurrency": "ILS",
+    "availability": "https://schema.org/InStock",
+    "url": "https://gr8minds.co.il/workshop"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap">
+</head>
+<body>
+<style>
+  :root{
+    --ink:#0F0F1E;
+    --muted:#5A5A6E;
+    --soft:#8B8B9E;
+    --pink:#FF1F8E;
+    --pink-deep:#E11D74;
+    --pink-light:#FFB5D9;
+    --teal:#3BC4CC;
+    --teal-light:#7DE8F0;
+    --teal-pale:#CDF4F7;
+    --gold:#F5C842;
+    --gold-deep:#D4A52A;
+    --tint-pink:#FFF0F7;
+    --tint-teal:#F0FBFC;
+    --tint-gold:#FFF9E8;
+    --tint-hero:#FFF8FB;
+    --white:#FFFFFF;
+    --line:#ECECF2;
+    --grad:linear-gradient(135deg,#FF1F8E 0%,#F5C842 100%);
+    --grad-soft:linear-gradient(135deg,#FF1F8E 0%,#FFB5D9 100%);
+    --grad-wide:linear-gradient(100deg,#7DE8F0 0%,#FFB5D9 40%,#FFD4B0 70%,#F5C842 100%);
+    --shadow:0 30px 60px -20px rgba(15,15,30,.12);
+    --shadow-sm:0 3px 5px rgba(15,15,30,.06);
+    --glow:0 0 24px rgba(255,31,142,.4);
+    --disp:"Space Grotesk","Heebo",system-ui,sans-serif;
+    --body:"Heebo","Space Grotesk",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--white);color:var(--ink);
+    font-family:var(--body);font-size:18px;line-height:1.7;font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .rtl{direction:rtl}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+  .narrow{max-width:900px;margin:0 auto;padding:0 28px}
+
+  /* ---------- announcement bar ---------- */
+  .bar{background:var(--grad);color:var(--white);padding:22px 0}
+  .bar-in{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;justify-content:space-between}
+  .bar h2{font-family:var(--body);font-weight:700;font-size:1.4rem;margin:0 0 3px;letter-spacing:-.02em}
+  .bar p{margin:0;font-size:.95rem;opacity:.92;font-weight:300}
+  .bar a{
+    display:inline-flex;align-items:center;gap:9px;background:var(--white);color:var(--ink);
+    text-decoration:none;font-weight:700;font-size:1rem;padding:13px 26px;border-radius:100px;white-space:nowrap;
+  }
+  .bar a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+  /* ---------- eyebrow ---------- */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--tint-pink);color:var(--pink-deep);
+    font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;padding:11px 22px;border-radius:100px;margin:0 0 30px;
+    direction:ltr;unicode-bidi:isolate;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink);flex:0 0 auto}
+  .eyebrow.plain{background:transparent;padding:0;margin-bottom:16px}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--tint-hero);padding:76px 0 84px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;gap:48px;align-items:start}
+  @media (min-width:980px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:56px}}
+  h1{
+    font-family:var(--body);font-weight:900;
+    font-size:clamp(2.9rem,7.4vw,5.4rem);line-height:1.02;letter-spacing:-.045em;
+    margin:0 0 26px;text-wrap:balance;
+  }
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lede{font-size:1.2rem;color:var(--muted);max-width:50ch;margin:0 0 32px;font-weight:400;line-height:1.65}
+  .hero .lede b{color:var(--ink);font-weight:700}
+  .mark{background:linear-gradient(transparent 58%,var(--teal-pale) 58%);padding:0 2px}
+
+  .meta{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--line);border:1px solid var(--line);
+    border-radius:16px;overflow:hidden;margin:0 0 34px;
+  }
+  .meta div{background:var(--white);padding:17px 22px}
+  .meta span{display:block;font-family:var(--disp);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin-bottom:5px}
+  .meta b{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+
+  .btn{
+    display:inline-block;background:var(--pink);color:var(--white);text-decoration:none;
+    font-family:var(--body);font-weight:700;font-size:1.08rem;padding:17px 40px;border-radius:100px;
+    box-shadow:var(--glow);border:none;
+  }
+  .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .btn.ghost{background:var(--white);color:var(--ink);box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+  .btn-note{font-size:.9rem;color:var(--soft);margin:16px 0 0;font-weight:300}
+
+  /* hero card */
+  .card{background:var(--white);border-radius:20px;box-shadow:var(--shadow);padding:32px 30px}
+  .card > h3{font-family:var(--body);font-weight:900;font-size:1.5rem;letter-spacing:-.03em;line-height:1.2;margin:0 0 6px}
+  .card > .kicker{font-size:.95rem;color:var(--muted);margin:0 0 26px;font-weight:300}
+  .rowlist{display:flex;flex-direction:column;gap:22px}
+  .row{display:flex;gap:16px;align-items:flex-start}
+  .ico{
+    flex:0 0 auto;width:46px;height:46px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ico svg{width:22px;height:22px}
+  .ico.p{background:var(--tint-pink);color:var(--pink)}
+  .ico.t{background:var(--tint-teal);color:var(--teal)}
+  .ico.g{background:var(--tint-gold);color:var(--gold-deep)}
+  .row b{display:block;font-size:1.08rem;font-weight:700;letter-spacing:-.01em;margin-bottom:2px}
+  .row span{display:block;font-size:.93rem;color:var(--muted);font-weight:300;line-height:1.5}
+
+  /* ---------- numbers ---------- */
+  .numbers{padding:64px 0;background:var(--white)}
+  .nums{display:grid;gap:34px 20px;grid-template-columns:repeat(2,1fr);text-align:center}
+  @media (min-width:760px){.nums{grid-template-columns:repeat(4,1fr)}}
+  .nums b{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,6vw,3.8rem);line-height:1;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
+  .nums span{display:block;font-size:.95rem;color:var(--muted);font-weight:300}
+
+  /* ---------- sections ---------- */
+  section{padding:88px 0}
+  .sec-pink{background:var(--tint-pink)}
+  .sec-teal{background:var(--tint-teal)}
+  .sec-gold{background:var(--tint-gold)}
+  h2{
+    font-family:var(--body);font-weight:900;
+    font-size:clamp(2rem,5vw,3.4rem);line-height:1.06;letter-spacing:-.04em;
+    margin:0 0 16px;text-wrap:balance;
+  }
+  .sub{font-size:1.1rem;color:var(--muted);max-width:58ch;margin:0 0 46px;font-weight:300;line-height:1.65}
+  h3{font-size:1.15rem;font-weight:700;margin:0 0 8px;letter-spacing:-.01em}
+  p{margin:0 0 16px}
+
+  /* instrument cards */
+  .instruments{display:grid;gap:22px}
+  @media (min-width:900px){.instruments{grid-template-columns:repeat(3,1fr)}}
+  .inst{background:var(--white);border-radius:20px;box-shadow:var(--shadow);padding:34px 30px;display:flex;flex-direction:column}
+  .inst .ico{width:54px;height:54px;border-radius:16px;margin-bottom:22px}
+  .inst .ico svg{width:26px;height:26px}
+  .inst .n{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--soft);display:block;margin-bottom:8px}
+  .inst h3{font-size:2rem;font-weight:900;letter-spacing:-.04em;margin:0 0 6px;line-height:1.1}
+  .inst .tag{font-size:1rem;font-weight:700;color:var(--pink-deep);margin:0 0 16px}
+  .inst > p{font-size:.98rem;color:var(--muted);font-weight:300;margin:0;line-height:1.65}
+  .inst .q{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted);font-weight:300}
+  .inst .q b{display:block;font-family:var(--disp);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--soft);margin-bottom:5px}
+
+  /* fit boxes */
+  .split{display:grid;gap:22px}
+  @media (min-width:820px){.split{grid-template-columns:1fr 1fr}}
+  .box{background:var(--white);border-radius:20px;padding:34px 32px;box-shadow:var(--shadow)}
+  .box h3{font-size:1.5rem;font-weight:900;letter-spacing:-.03em;margin-bottom:22px}
+  .box ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .box li{display:flex;gap:13px;align-items:flex-start;font-size:1rem;font-weight:300;color:var(--muted);line-height:1.55}
+  .box li::before{flex:0 0 auto;font-weight:700;font-size:1rem;line-height:1.55}
+  .box.yes li::before{content:"✓";color:var(--teal)}
+  .box.no li::before{content:"✕";color:var(--pink)}
+
+  /* timeline */
+  .flow{background:var(--white);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+  .flow > div{padding:26px 32px;border-bottom:1px solid var(--line);display:grid;gap:6px 26px;grid-template-columns:1fr}
+  @media (min-width:760px){.flow > div{grid-template-columns:96px 1fr}}
+  .flow > div:last-child{border-bottom:none}
+  .flow .t{font-family:var(--disp);font-weight:700;font-size:1.25rem;color:var(--pink);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .flow .x{font-size:1.12rem;font-weight:700;letter-spacing:-.02em}
+  .flow .n{grid-column:1/-1;font-size:.96rem;color:var(--muted);font-weight:300;line-height:1.6}
+  @media (min-width:760px){.flow .n{grid-column:2}}
+
+  /* dark section */
+  .dark{background:var(--ink);color:var(--white)}
+  .dark h2{color:var(--white)}
+  .dark .eyebrow{background:rgba(255,31,142,.14);color:var(--pink-light)}
+  .dark p{color:rgba(255,255,255,.72);font-weight:300}
+  .dark p b, .dark p strong{color:var(--white);font-weight:700}
+  .dark .statrow{display:grid;gap:30px 24px;grid-template-columns:repeat(3,1fr);margin:40px 0 0;padding-top:32px;border-top:1px solid rgba(255,255,255,.14)}
+  .dark .statrow b{display:block;font-family:var(--disp);font-weight:700;font-size:2.4rem;line-height:1;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
+  .dark .statrow span{font-size:.9rem;color:rgba(255,255,255,.62);font-weight:300;line-height:1.45;display:block}
+
+  /* bring */
+  .bring{background:var(--white);border-radius:20px;box-shadow:var(--shadow);padding:34px 32px}
+  .bring ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+  .bring li{display:flex;gap:14px;align-items:flex-start;font-size:1.02rem;font-weight:300;color:var(--muted);line-height:1.55}
+  .bring li b{color:var(--ink);font-weight:700}
+  .bring li::before{content:"";flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--grad);margin-top:.55em}
+
+  /* price */
+  .price{background:var(--grad);border-radius:24px;padding:56px 36px;text-align:center;color:var(--white)}
+  .price .eyebrow{background:rgba(255,255,255,.2);color:var(--white)}
+  .price .eyebrow::before{background:var(--white)}
+  .price h2{color:var(--white);margin-bottom:10px}
+  .price .was{font-size:1.05rem;opacity:.85;margin:0;font-weight:300}
+  .price .amount{font-family:var(--disp);font-weight:700;font-size:clamp(3.4rem,9vw,5rem);line-height:1;letter-spacing:-.05em;margin:14px 0 8px;color:var(--white)}
+  .price .seats{font-size:1rem;opacity:.88;margin:0 0 32px;font-weight:300}
+  .price .btn{background:var(--white);color:var(--ink);box-shadow:0 10px 30px -10px rgba(15,15,30,.4)}
+  .price .fine{font-size:.88rem;opacity:.82;margin:20px 0 0;font-weight:300}
+
+  /* faq */
+  .faq{display:flex;flex-direction:column;gap:14px}
+  .faq details{background:var(--white);border-radius:16px;box-shadow:var(--shadow-sm);padding:22px 26px;border:1px solid var(--line)}
+  .faq summary{font-weight:700;font-size:1.08rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;letter-spacing:-.01em}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--pink);font-weight:700;font-size:1.4rem;line-height:1;flex:0 0 auto}
+  .faq details[open] summary::after{content:"−"}
+  .faq details p{margin:16px 0 0;font-size:1rem;color:var(--muted);font-weight:300;line-height:1.65}
+
+  /* final */
+  .final{text-align:center;padding:96px 0}
+  .final h2{margin-bottom:18px}
+  .final .sub{margin:0 auto 36px}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.55);padding:36px 0;font-size:.92rem;font-weight:300}
+  .foot-in{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;align-items:center}
+  .logo{font-family:var(--disp);font-weight:700;font-size:1.15rem;color:var(--white);letter-spacing:-.02em}
+  .logo i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;border-radius:50%;background:var(--pink);color:var(--white);font-size:.85rem;margin:0 1px}
+  footer a{color:rgba(255,255,255,.55);text-decoration:none}
+  footer a:hover{color:var(--white)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="rtl">
+
+  <div class="bar">
+    <div class="wrap bar-in">
+      <div>
+        <h2>סדנה פתוחה, רביעי 2 בספטמבר</h2>
+        <p>12 מקומות בלבד. ההרשמה נסגרת ביום שני בערב.</p>
+      </div>
+      <a class="cta-link" href="/api/checkout" data-checkout data-product="workshop-agents-2026-09-02" data-price="590" data-currency="ILS" data-seats="12">שמרו לי מקום</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">AI Workshop &middot; Herzliya</span>
+        <h1>שעתיים.<br><span class="grad">שלושה כלים.</span><br>אפס קוד.</h1>
+        <p class="lede">לא הרצאה על AI ולא סקירת כלים. אתם מגיעים עם לפטופ ויוצאים עם <b>שלושה אייג'נטים עובדים</b>, מחוברים ליומן ולמייל שלכם, שתשתמשו בהם <span class="mark">כבר מחר בבוקר</span>.</p>
+        <div class="meta">
+          <div><span>Date</span><b>רביעי, 2.9</b></div>
+          <div><span>Time</span><b>10:00 עד 12:00</b></div>
+          <div><span>Where</span><b>אריה שנקר 1, הרצליה</b></div>
+          <div><span>Seats</span><b>12 בלבד</b></div>
+        </div>
+        <a class="btn cta-link" href="/api/checkout" data-checkout data-product="workshop-agents-2026-09-02" data-price="590" data-currency="ILS" data-seats="12">שמרו לי מקום</a>
+        <p class="btn-note">12 מקומות בלבד. ההרשמה נסגרת ביום שני 31.8 בערב.</p>
+      </div>
+
+      <div class="card">
+        <h3>שלושה מכשירים,<br>לוח מחוונים אחד</h3>
+        <p class="kicker">כל אחד עונה על שאלה אחרת. שלושתם נשארים אצלכם.</p>
+        <div class="rowlist">
+          <div class="row">
+            <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v3M16 4v3"/></svg></div>
+            <div><b>קוקפיט</b><span>כל היום שלכם במסך אחד</span></div>
+          </div>
+          <div class="row">
+            <div class="ico t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
+            <div><b>ראדאר</b><span>מי נעלם לכם בלי ששמתם לב</span></div>
+          </div>
+          <div class="row">
+            <div class="ico g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><path d="M12 7.5V21M5 12a7 7 0 0 0 14 0M3 12h4M17 12h4"/></svg></div>
+            <div><b>עוגן</b><span>הלוח שנשאר, וששולחים לצוות</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="numbers">
+    <div class="wrap nums">
+      <div><b>120</b><span>דקות, מהן 90 של בנייה</span></div>
+      <div><b>3</b><span>כלים עובדים ביד</span></div>
+      <div><b>12</b><span>מקומות, לא יותר</span></div>
+      <div><b>0</b><span>שורות קוד</span></div>
+    </div>
+  </div>
+
+  <section class="sec-pink">
+    <div class="wrap">
+      <span class="eyebrow">What you build</span>
+      <h2>שלושה מכשירים שאתם בונים בעצמכם</h2>
+      <p class="sub">לא תרגילים ולא דמו. כלים אמיתיים, מחוברים לחשבונות שלכם, שנשארים אצלכם אחרי שהסדנה נגמרת.</p>
+      <div class="instruments">
+
+        <div class="inst">
+          <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v3M16 4v3"/></svg></div>
+          <span class="n">01</span>
+          <h3>קוקפיט</h3>
+          <p class="tag">כל היום שלכם במסך אחד</p>
+          <p>מושך את היומן, המייל והקבצים שלכם ומרכיב מהם עמוד אחד: משפט שמסכם איך היום נראה, מה הדבר הבא, מה דורש אתכם היום, ושלוש המשימות שאם רק הן יקרו, היום הצליח.</p>
+          <p class="q"><b>The question it answers</b>מה קורה לי היום, ובמה להתחיל</p>
+        </div>
+
+        <div class="inst">
+          <div class="ico t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
+          <span class="n">02</span>
+          <h3>ראדאר</h3>
+          <p class="tag">מי נעלם לכם בלי ששמתם לב</p>
+          <p>מקבץ את המייל לפי אנשים במקום לפי תאריך. לכל לקוח ואיש קשר: מתי דיברתם לאחרונה, מה נשאר פתוח, ומי מכם שלח אחרון. רוב האנשים מגלים בסדנה קשר שהתקרר חודש.</p>
+          <p class="q"><b>The question it answers</b>מי חסר מהתמונה שלי כרגע</p>
+        </div>
+
+        <div class="inst">
+          <div class="ico g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><path d="M12 7.5V21M5 12a7 7 0 0 0 14 0M3 12h4M17 12h4"/></svg></div>
+          <span class="n">03</span>
+          <h3>עוגן</h3>
+          <p class="tag">הלוח שנשאר, וששולחים לצוות</p>
+          <p>לוח שזוכר את עצמו, גם מחר וגם ממכשיר אחר, ושאפשר לשלוח את הקישור שלו לעמית והוא יערוך אותו איתכם. זה הרגע שבו זה מפסיק להיות כלי אישי ומתחיל להיות כלי של צוות.</p>
+          <p class="q"><b>The question it answers</b>מה נשאר מזה מחר, וגם אצל מישהו אחר</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Who it is for</span>
+      <h2>למי זה מתאים, ולמי לא</h2>
+      <p class="sub">12 מקומות זה מעט, וחדר שמורכב נכון שווה יותר מחדר מלא.</p>
+      <div class="split">
+        <div class="box yes">
+          <h3>הסדנה בשבילכם אם</h3>
+          <ul>
+            <li>אתם מנהלים או בעלי עסק, והיום שלכם מפוזר בין יומן, מייל ורשימות</li>
+            <li>ניסיתם AI, יצאתם מרשימים ולא נשאר מזה כלום ביום יום</li>
+            <li>אתם רוצים כלי שעובד, לא הבנה תיאורטית של איך זה עובד</li>
+            <li>יש לכם צוות ואתם בודקים אם יש כאן משהו שכדאי להכניס פנימה</li>
+          </ul>
+        </div>
+        <div class="box no">
+          <h3>הסדנה לא בשבילכם אם</h3>
+          <ul>
+            <li>אתם מחפשים סקירה של הכלים החדשים בשוק</li>
+            <li>אתם מפתחים ורוצים לצלול לארכיטקטורה ולקוד</li>
+            <li>אתם מעדיפים לשבת ולהקשיב. פה בונים כל הזמן</li>
+            <li>אתם לא מוכנים לחבר את היומן והמייל שלכם. בלי זה אין סדנה</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-teal">
+    <div class="wrap">
+      <span class="eyebrow">The run</span>
+      <h2>שעתיים, רובן בנייה</h2>
+      <p class="sub">שלושה בלוקים של בנייה, הפסקה אחת קצרה, וסבב שבו רואים מה כולם הוציאו מזה.</p>
+      <div class="flow">
+        <div><span class="t">10:00</span><span class="x">פתיחה והדגמה חיה</span><span class="n">אני פותחת את הקוקפיט האמיתי שלי על המסך, עם המייל והיומן של אותו בוקר.</span></div>
+        <div><span class="t">10:20</span><span class="x">בונים את הקוקפיט</span><span class="n">הכלי הגדול, בשלושה גלים. כאן נופל האסימון על ההבדל בין דשבורד לאייג'נט.</span></div>
+        <div><span class="t">11:07</span><span class="x">בונים את הראדאר</span><span class="n">אותו מייל בדיוק, שאלה אחרת לגמרי. הכלי שגורם לאנשים להוציא טלפון באמצע הסדנה.</span></div>
+        <div><span class="t">11:29</span><span class="x">בונים את העוגן</span><span class="n">שולחים את הקישור לאדם שיושב לידכם ורואים אותו עורך את הלוח שלכם.</span></div>
+        <div><span class="t">11:49</span><span class="x">סבב מסכים וסגירה</span><span class="n">כמה מכם מראים מה בנו, ואיך ממשיכים מכאן מחר בבוקר.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="narrow">
+      <span class="eyebrow">Who runs it</span>
+      <h2>מי שבונה את זה בפועל, לא מי שמרצה על זה</h2>
+      <p><strong>לי גורדון, מייסדת GR8MINDS.</strong> בונה סוכני AI, אוטומציות ומערכות לארגונים. הסדנה מעבירה בדיוק את מה שהיא עושה בעבודה, על אותם כלים ובאותה שיטה.</p>
+      <p>בין הדברים שנבנו: מערכת הזדמנויות רב לקוחית שרצה בפרודקשן, מערכת מדידה שבודקת אם מנועי AI ממליצים על מותג, ובוטים שרצים בכל שבוע אצל לקוחות בלי שאף אחד נוגע בהם.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <span class="eyebrow">Before you come</span>
+      <h2>מה צריך להביא</h2>
+      <p class="sub">חמש דקות הכנה מראש, ואנחנו מתחילים לבנות בדקה העשרים.</p>
+      <div class="bring">
+        <ul>
+          <li><b>לפטופ טעון ומטען.</b> אי אפשר להשתתף מהטלפון</li>
+          <li><b>חשבון Claude פעיל בתשלום.</b> אם אין, אפשר לפתוח ביום ההרשמה</li>
+          <li><b>חיבור Gmail ו-Google Calendar לחשבון.</b> נשלח הסבר קצר לפני הסדנה, לוקח חמש דקות</li>
+          <li><b>שום ידע בתכנות.</b> באמת. אף שורת קוד לא נכתבת בסדנה</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-gold">
+    <div class="narrow">
+      <div class="price">
+        <span class="eyebrow">Seats</span>
+        <h2>מחיר ומקומות</h2>
+        <div class="amount">590 ש"ח</div>
+        <p class="seats">המחיר לפני מע"מ. 12 מקומות בסך הכל.</p>
+        <a class="btn cta-link" href="/api/checkout" data-checkout data-product="workshop-agents-2026-09-02" data-price="590" data-currency="ILS" data-seats="12">שמרו לי מקום</a>
+        <p class="fine">התשלום מראש ומבטיח את המקום. ביטול עד 48 שעות לפני מזכה בהחזר מלא.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <span class="eyebrow">FAQ</span>
+      <h2>שאלות שנשאלות</h2>
+      <div class="faq" style="margin-top:36px">
+        <details>
+          <summary>אני לא יודע לתכנת. זה באמת מתאים לי?</summary>
+          <p>כן, וזו הנקודה. הכל נעשה בשיחה רגילה. הפרומפטים המדויקים מחולקים מודפסים על השולחן, כך שגם מי שלא כתב פרומפט מימיו יוצא עם שלושה כלים.</p>
+        </details>
+        <details>
+          <summary>מה קורה עם המידע שלי? בטוח לחבר את המייל?</summary>
+          <p>הכלים שאתם בונים רצים אצלכם בדפדפן ומדברים עם החשבונות שלכם, בהרשאות שלכם. אני לא רואה את המייל ואת היומן שלכם, והקישור לכלי פרטי עד שאתם בוחרים לשתף אותו.</p>
+        </details>
+        <details>
+          <summary>הכלים נשארים אצלי אחרי הסדנה?</summary>
+          <p>כן. הם בחשבון שלכם ואתם ממשיכים לשנות אותם. אתם גם מקבלים במייל את כל הפרומפטים, כדי לבנות אותם מחדש או לבנות כלים נוספים.</p>
+        </details>
+        <details>
+          <summary>תהיה הקלטה?</summary>
+          <p>לא. זו סדנת בנייה ולא הרצאה, וצפייה בהקלטה לא מייצרת את התוצאה. מי שלא יכול להגיע מוזמן לסדנה הבאה.</p>
+        </details>
+        <details>
+          <summary>אפשר להעביר את הסדנה אצלנו בחברה?</summary>
+          <p>כן. הגרסה הארגונית היא שלוש שעות, עד 15 משתתפים, ובנויה סביב תהליכים אמיתיים שקיימים אצלכם. דברו איתי ואשלח פרטים.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="final sec-pink">
+    <div class="narrow">
+      <h2>מחר בבוקר זה כבר יכול להיראות אחרת</h2>
+      <p class="sub">שעתיים, שלושה כלים, ואתם יוצאים איתם ביד.</p>
+      <a class="btn cta-link" href="/api/checkout" data-checkout data-product="workshop-agents-2026-09-02" data-price="590" data-currency="ILS" data-seats="12">שמרו לי מקום</a>
+      <p class="btn-note">רביעי 2 בספטמבר, 10:00 עד 12:00, אריה שנקר 1 הרצליה.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap foot-in">
+      <span class="logo">GR<i>8</i>MINDS</span>
+      <span><a href="mailto:ai@gr8minds.co.il">ai@gr8minds.co.il</a> &middot; <a href="https://gr8minds.co.il">gr8minds.co.il</a></span>
+    </div>
+  </footer>
+
+</div>
+
+
+<!-- ===== Checkout: registration details, then Cardcom hosted payment ===== -->
+<div class="modal" id="register" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="reg-title">
+    <button class="modal-x" type="button" data-close aria-label="סגירה">&times;</button>
+    <h3 id="reg-title">שמירת מקום בסדנה</h3>
+    <p class="modal-sub">רביעי 2 בספטמבר, 10:00 עד 12:00, אריה שנקר 1 הרצליה.</p>
+    <form id="reg-form" method="POST" action="/api/checkout">
+      <label>שם מלא
+        <input name="name" type="text" required autocomplete="name" maxlength="80">
+      </label>
+      <label>אימייל
+        <input name="email" type="email" required autocomplete="email" maxlength="120">
+      </label>
+      <label>טלפון
+        <input name="phone" type="tel" required autocomplete="tel" maxlength="30"
+               inputmode="tel" pattern="[0-9+\-\(\) ]{9,}">
+      </label>
+      <p class="modal-err" id="reg-err" hidden></p>
+      <button class="btn" type="submit" id="reg-submit">מעבר לתשלום מאובטח</button>
+      <p class="modal-fine">
+        התשלום מאובטח ומתבצע בדף של קארדקום. חשבונית נשלחת במייל.
+        ביטול עד 48 שעות לפני מזכה בהחזר מלא.
+      </p>
+    </form>
+  </div>
+</div>
+
+<style>
+  .modal[hidden]{display:none}
+  .modal{position:fixed;inset:0;z-index:90;display:flex;align-items:center;
+    justify-content:center;padding:20px}
+  .modal-backdrop{position:absolute;inset:0;background:rgba(15,15,30,.55);
+    backdrop-filter:blur(3px)}
+  .modal-card{position:relative;background:var(--white);border-radius:22px;
+    padding:34px 30px 26px;width:min(430px,100%);box-shadow:var(--shadow);
+    max-height:92vh;overflow:auto;animation:modal-in .18s ease-out}
+  @keyframes modal-in{from{opacity:0;transform:translateY(12px)}}
+  @media (prefers-reduced-motion:reduce){.modal-card{animation:none}}
+  .modal-card h3{font-family:var(--disp);font-size:1.5rem;margin:0 0 6px}
+  .modal-sub{color:var(--muted);font-size:.95rem;margin:0 0 20px}
+  .modal-x{position:absolute;inset-inline-end:16px;top:12px;border:0;
+    background:none;font-size:1.8rem;line-height:1;color:var(--soft);
+    cursor:pointer;padding:4px}
+  .modal-x:hover{color:var(--ink)}
+  #reg-form label{display:block;font-size:.9rem;font-weight:600;
+    margin-bottom:14px;color:var(--ink)}
+  #reg-form input{display:block;width:100%;margin-top:6px;padding:12px 14px;
+    border:1.5px solid var(--line);border-radius:12px;font:inherit;
+    font-size:1rem;font-weight:400;background:var(--white);color:var(--ink)}
+  #reg-form input:focus{outline:none;border-color:var(--pink);
+    box-shadow:0 0 0 3px rgba(255,31,142,.14)}
+  #reg-form .btn{width:100%;margin-top:6px;border:0;cursor:pointer;
+    font-family:var(--disp);font-size:1.05rem;padding:15px 20px;
+    border-radius:60px;background:var(--grad);color:var(--white)}
+  #reg-form .btn[disabled]{opacity:.6;cursor:progress}
+  .modal-err{background:var(--tint-pink);color:var(--pink-deep);
+    border-radius:10px;padding:10px 12px;font-size:.88rem;margin:0 0 12px}
+  .modal-fine{color:var(--soft);font-size:.8rem;line-height:1.6;
+    margin:14px 0 0;text-align:center}
+</style>
+
+<script>
+(function(){
+  var modal  = document.getElementById('register');
+  var form   = document.getElementById('reg-form');
+  var errBox = document.getElementById('reg-err');
+  var submit = document.getElementById('reg-submit');
+  var lastFocus = null;
+
+  function open(e){
+    if (e) e.preventDefault();
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var first = form.querySelector('input');
+    if (first) first.focus();
+  }
+  function close(){
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('[data-checkout]').forEach(function(a){
+    a.addEventListener('click', open);
+  });
+  modal.querySelectorAll('[data-close]').forEach(function(el){
+    el.addEventListener('click', close);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !modal.hidden) close();
+  });
+
+  function fail(msg){
+    errBox.textContent = msg;
+    errBox.hidden = false;
+    submit.disabled = false;
+    submit.textContent = 'מעבר לתשלום מאובטח';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errBox.hidden = true;
+    submit.disabled = true;
+    submit.textContent = 'רגע, פותחים תשלום מאובטח...';
+
+    var payload = {
+      name:  form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim()
+    };
+
+    fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r){ return r.json().then(function(d){ return {ok: r.ok, data: d}; }); })
+    .then(function(res){
+      if (res.ok && res.data.url) { window.location.href = res.data.url; return; }
+      fail(res.data.message || 'לא הצלחנו לפתוח את דף התשלום. נסו שוב, או כתבו לנו ל-ai@gr8minds.co.il');
+    })
+    .catch(function(){
+      fail('בעיית תקשורת. נסו שוב, או כתבו לנו ל-ai@gr8minds.co.il');
+    });
+  });
+
+  // Returning from a declined or abandoned payment.
+  if (/[?&]payment=failed/.test(location.search)) {
+    open();
+    fail('התשלום לא הושלם. אפשר לנסות שוב.');
+  }
+})();
+</script>
+
+</body>
+</html>
