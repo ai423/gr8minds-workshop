@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GR8MINDS">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF1F8E"/>
+      <stop offset="1" stop-color="#F5C842"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <!-- The 8 is drawn as two rings so it never depends on a font being available. -->
+  <g fill="none" stroke="#fff" stroke-width="6">
+    <circle cx="32" cy="24" r="9"/>
+    <circle cx="32" cy="42" r="11"/>
+  </g>
+</svg>
