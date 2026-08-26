@@ -72,8 +72,9 @@
 
     <div class="facts">
       <dl>
-        <dt>מתי</dt><dd>רביעי, 2 בספטמבר 2026, 10:00 עד 12:00</dd>
-        <dt>איפה</dt><dd>אריה שנקר 1, הרצליה</dd>
+        <dt>מה</dt><dd id="t-what">סדנה של GR8MINDS</dd>
+        <dt>מתי</dt><dd id="t-when">10:00 עד 12:00</dd>
+        <dt>איפה</dt><dd id="t-where">אריה שנקר 1, הרצליה</dd>
         <dt>מה מביאים</dt><dd>לפטופ טעון</dd>
       </dl>
     </div>
@@ -91,5 +92,19 @@
       שאלה לפני הסדנה? <a href="mailto:ai@gr8minds.co.il">ai@gr8minds.co.il</a>
     </p>
   </main>
+
+
+<script type="module">
+  // Which workshop was paid for. checkout.js appends ?w=<slug> on success.
+  // Details come from the shared catalogue, so a new workshop needs no edit here.
+  import { bySlug } from '/workshops.js';
+  const m = /[?&]w=([a-z0-9-]+)/i.exec(location.search);
+  const w = m && bySlug(m[1]);
+  if (w) {                       // unknown or missing: the generic text stands
+    document.getElementById('t-what').textContent = w.title;
+    document.getElementById('t-when').textContent = w.whenLong;
+    document.getElementById('t-where').textContent = w.place;
+  }
+</script>
 </body>
 </html>

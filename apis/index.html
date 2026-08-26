@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>אייג'נט שרץ לבד | סדנת API של GR8MINDS</title>
+<meta name="description" content="סדנה פתוחה של שעתיים שמסבירה מה זה API, מתי הוא שווה את זה, ובסופה כל משתתף יוצא עם אייג'נט שרץ לבד כל בוקר. רביעי 9 בספטמבר, אריה שנקר 1 הרצליה, 12 מקומות.">
+<link rel="canonical" href="https://workshops.gr8minds.co.il/apis">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:url" content="https://workshops.gr8minds.co.il/apis">
+<meta property="og:title" content="אייג'נט אחד. אפס התקנות. רץ לבד.">
+<meta property="og:description" content="סדנה פתוחה של שעתיים שמסבירה מה זה API, מתי הוא שווה את זה, ובסופה כל משתתף יוצא עם אייג'נט שרץ לבד כל בוקר. רביעי 9 בספטמבר, אריה שנקר 1 הרצליה, 12 מקומות.">
+<meta property="og:site_name" content="GR8MINDS">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/checkout.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationEvent",
+  "name": "אייג'נט שרץ לבד, סדנת API",
+  "startDate": "2026-09-09T10:00:00+03:00",
+  "endDate": "2026-09-09T12:00:00+03:00",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "maximumAttendeeCapacity": 12,
+  "location": {"@type":"Place","name":"אריה שנקר 1, הרצליה","address":{"@type":"PostalAddress","streetAddress":"אריה שנקר 1","addressLocality":"הרצליה","addressCountry":"IL"}},
+  "organizer": {"@type":"Organization","name":"GR8MINDS","url":"https://gr8minds.co.il","email":"ai@gr8minds.co.il"},
+  "offers": {"@type":"Offer","price":"590","priceCurrency":"ILS","availability":"https://schema.org/InStock","url":"https://workshops.gr8minds.co.il/apis"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap">
+</head>
+<body>
+<style>
+  :root{
+    --ink:#0F0F1E;
+    --muted:#5A5A6E;
+    --soft:#8B8B9E;
+    --pink:#FF1F8E;
+    --pink-deep:#E11D74;
+    --pink-light:#FFB5D9;
+    --teal:#3BC4CC;
+    --teal-light:#7DE8F0;
+    --teal-pale:#CDF4F7;
+    --gold:#F5C842;
+    --gold-deep:#D4A52A;
+    --tint-pink:#FFF0F7;
+    --tint-teal:#F0FBFC;
+    --tint-gold:#FFF9E8;
+    --tint-hero:#FFF8FB;
+    --white:#FFFFFF;
+    --line:#ECECF2;
+    --grad:linear-gradient(135deg,#FF1F8E 0%,#F5C842 100%);
+    --grad-soft:linear-gradient(135deg,#FF1F8E 0%,#FFB5D9 100%);
+    --grad-wide:linear-gradient(100deg,#7DE8F0 0%,#FFB5D9 40%,#FFD4B0 70%,#F5C842 100%);
+    --shadow:0 30px 60px -20px rgba(15,15,30,.12);
+    --shadow-sm:0 3px 5px rgba(15,15,30,.06);
+    --glow:0 0 24px rgba(255,31,142,.4);
+    --disp:"Space Grotesk","Heebo",system-ui,sans-serif;
+    --body:"Heebo","Space Grotesk",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--white);color:var(--ink);
+    font-family:var(--body);font-size:18px;line-height:1.7;font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .rtl{direction:rtl}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+  .narrow{max-width:900px;margin:0 auto;padding:0 28px}
+
+  /* ---------- announcement bar ---------- */
+  .bar{background:var(--grad);color:var(--white);padding:22px 0}
+  .bar-in{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;justify-content:space-between}
+  .bar h2{font-family:var(--body);font-weight:700;font-size:1.4rem;margin:0 0 3px;letter-spacing:-.02em}
+  .bar p{margin:0;font-size:.95rem;opacity:.92;font-weight:300}
+  .bar a{
+    display:inline-flex;align-items:center;gap:9px;background:var(--white);color:var(--ink);
+    text-decoration:none;font-weight:700;font-size:1rem;padding:13px 26px;border-radius:100px;white-space:nowrap;
+  }
+  .bar a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+  /* ---------- eyebrow ---------- */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--tint-pink);color:var(--pink-deep);
+    font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;padding:11px 22px;border-radius:100px;margin:0 0 30px;
+    direction:ltr;unicode-bidi:isolate;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink);flex:0 0 auto}
+  .eyebrow.plain{background:transparent;padding:0;margin-bottom:16px}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--tint-hero);padding:76px 0 84px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;gap:48px;align-items:start}
+  @media (min-width:980px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:56px}}
+  h1{
+    font-family:var(--body);font-weight:900;
+    font-size:clamp(2.9rem,7.4vw,5.4rem);line-height:1.02;letter-spacing:-.045em;
+    margin:0 0 26px;text-wrap:balance;
+  }
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lede{font-size:1.2rem;color:var(--muted);max-width:50ch;margin:0 0 32px;font-weight:400;line-height:1.65}
+  .hero .lede b{color:var(--ink);font-weight:700}
+  .mark{background:linear-gradient(transparent 58%,var(--teal-pale) 58%);padding:0 2px}
+
+  .meta{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--line);border:1px solid var(--line);
+    border-radius:16px;overflow:hidden;margin:0 0 34px;
+  }
+  .meta div{background:var(--white);padding:17px 22px}
+  .meta span{display:block;font-family:var(--disp);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin-bottom:5px}
+  .meta b{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+
+  .btn{
+    display:inline-block;background:var(--pink);color:var(--white);text-decoration:none;
+    font-family:var(--body);font-weight:700;font-size:1.08rem;padding:17px 40px;border-radius:100px;
+    box-shadow:var(--glow);border:none;
+  }
+  .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .btn.ghost{background:var(--white);color:var(--ink);box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+  .btn-note{font-size:.9rem;color:var(--soft);margin:16px 0 0;font-weight:300}
+
+  /* hero card */
+  .card{background:var(--white);border-radius:20px;box-shadow:var(--shadow);padding:32px 30px}
+  .card > h3{font-family:var(--body);font-weight:900;font-size:1.5rem;letter-spacing:-.03em;line-height:1.2;margin:0 0 6px}
+  .card > .kicker{font-size:.95rem;color:var(--muted);margin:0 0 26px;font-weight:300}
+  .rowlist{display:flex;flex-direction:column;gap:22px}
+  .row{display:flex;gap:16px;align-items:flex-start}
+  .ico{
+    flex:0 0 auto;width:46px;height:46px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ico svg{width:22px;height:22px}
+  .ico.p{background:var(--tint-pink);color:var(--pink)}
+  .ico.t{background:var(--tint-teal);color:var(--teal)}
+  .ico.g{background:var(--tint-gold);color:var(--gold-deep)}
+  .row b{display:block;font-size:1.08rem;font-weight:700;letter-spacing:-.01em;margin-bottom:2px}
+  .row span{display:block;font-size:.93rem;color:var(--muted);font-weight:300;line-height:1.5}
+
+  /* ---------- numbers ---------- */
+  .numbers{padding:64px 0;background:var(--white)}
+  .nums{display:grid;gap:34px 20px;grid-template-columns:repeat(2,1fr);text-align:center}
+  @media (min-width:760px){.nums{grid-template-columns:repeat(4,1fr)}}
+  .nums b{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,6vw,3.8rem);line-height:1;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
+  .nums span{display:block;font-size:.95rem;color:var(--muted);font-weight:300}
+
+  /* ---------- sections ---------- */
+  section{padding:88px 0}
+  .sec-pink{background:var(--tint-pink)}
+  .sec-teal{background:var(--tint-teal)}
+  .sec-gold{background:var(--tint-gold)}
+  h2{
+    font-family:var(--body);font-weight:900;
+    font-size:clamp(2rem,5vw,3.4rem);line-height:1.06;letter-spacing:-.04em;
+    margin:0 0 16px;text-wrap:balance;
+  }
+  .sub{font-size:1.1rem;color:var(--muted);max-width:58ch;margin:0 0 46px;font-weight:300;line-height:1.65}
+  h3{font-size:1.15rem;font-weight:700;margin:0 0 8px;letter-spacing:-.01em}
+  p{margin:0 0 16px}
+
+  /* instrument cards */
+  .instruments{display:grid;gap:22px}
+  @media (min-width:900px){.instruments{grid-template-columns:repeat(3,1fr)}}
+  .inst{background:var(--white);border-radius:20px;box-shadow:var(--shadow);padding:34px 30px;display:flex;flex-direction:column}
+  .inst .ico{width:54px;height:54px;border-radius:16px;margin-bottom:22px}
+  .inst .ico svg{width:26px;height:26px}
+  .inst .n{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--soft);display:block;margin-bottom:8px}
+  .inst h3{font-size:2rem;font-weight:900;letter-spacing:-.04em;margin:0 0 6px;line-height:1.1}
+  .inst .tag{font-size:1rem;font-weight:700;color:var(--pink-deep);margin:0 0 16px}
+  .inst > p{font-size:.98rem;color:var(--muted);font-weight:300;margin:0;line-height:1.65}
+  .inst .q{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted);font-weight:300}
+  .inst .q b{display:block;font-family:var(--disp);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--soft);margin-bottom:5px}
+
+  /* fit boxes */
+  .split{display:grid;gap:22px}
+  @media (min-width:820px){.split{grid-template-columns:1fr 1fr}}
+  .box{background:var(--white);border-radius:20px;padding:34px 32px;box-shadow:var(--shadow)}
+  .box h3{font-size:1.5rem;font-weight:900;letter-spacing:-.03em;margin-bottom:22px}
+  .box ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .box li{display:flex;gap:13px;align-items:flex-start;font-size:1rem;font-weight:300;color:var(--muted);line-height:1.55}
+  .box li::before{flex:0 0 auto;font-weight:700;font-size:1rem;line-height:1.55}
+  .box.yes li::before{content:"✓";color:var(--teal)}
+  .box.no li::before{content:"✕";color:var(--pink)}
+
+  /* timeline */
+  .flow{background:var(--white);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+  .flow > div{padding:26px 32px;border-bottom:1px solid var(--line);display:grid;gap:6px 26px;grid-template-columns:1fr}
+  @media (min-width:760px){.flow > div{grid-template-columns:96px 1fr}}
+  .flow > div:last-child{border-bottom:none}
+  .flow .t{font-family:var(--disp);font-weight:700;font-size:1.25rem;color:var(--pink);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .flow .x{font-size:1.12rem;font-weight:700;letter-spacing:-.02em}
+  .flow .n{grid-column:1/-1;font-size:.96rem;color:var(--muted);font-weight:300;line-height:1.6}
+  @media (min-width:760px){.flow .n{grid-column:2}}
+
+  /* dark section */
+  .dark{background:var(--ink);color:var(--white)}
+  .dark h2{color:var(--white)}
+  .dark .eyebrow{background:rgba(255,31,142,.14);color:var(--pink-light)}
+  .dark p{color:rgba(255,255,255,.72);font-weight:300}
+  .dark p b, .dark p strong{color:var(--white);font-weight:700}
+  .dark .statrow{display:grid;gap:30px 24px;grid-template-columns:repeat(3,1fr);margin:40px 0 0;padding-top:32px;border-top:1px solid rgba(255,255,255,.14)}
+  .dark .statrow b{display:block;font-family:var(--disp);font-weight:700;font-size:2.4rem;line-height:1;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
+  .dark .statrow span{font-size:.9rem;color:rgba(255,255,255,.62);font-weight:300;line-height:1.45;display:block}
+
+  /* bring */
+  .bring{background:var(--white);border-radius:20px;box-shadow:var(--shadow);padding:34px 32px}
+  .bring ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+  .bring li{display:flex;gap:14px;align-items:flex-start;font-size:1.02rem;font-weight:300;color:var(--muted);line-height:1.55}
+  .bring li b{color:var(--ink);font-weight:700}
+  .bring li::before{content:"";flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--grad);margin-top:.55em}
+
+  /* price */
+  .price{background:var(--grad);border-radius:24px;padding:56px 36px;text-align:center;color:var(--white)}
+  .price .eyebrow{background:rgba(255,255,255,.2);color:var(--white)}
+  .price .eyebrow::before{background:var(--white)}
+  .price h2{color:var(--white);margin-bottom:10px}
+  .price .was{font-size:1.05rem;opacity:.85;margin:0;font-weight:300}
+  .price .amount{font-family:var(--disp);font-weight:700;font-size:clamp(3.4rem,9vw,5rem);line-height:1;letter-spacing:-.05em;margin:14px 0 8px;color:var(--white)}
+  .price .seats{font-size:1rem;opacity:.88;margin:0 0 32px;font-weight:300}
+  .price .btn{background:var(--white);color:var(--ink);box-shadow:0 10px 30px -10px rgba(15,15,30,.4)}
+  .price .fine{font-size:.88rem;opacity:.82;margin:20px 0 0;font-weight:300}
+
+  /* faq */
+  .faq{display:flex;flex-direction:column;gap:14px}
+  .faq details{background:var(--white);border-radius:16px;box-shadow:var(--shadow-sm);padding:22px 26px;border:1px solid var(--line)}
+  .faq summary{font-weight:700;font-size:1.08rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;letter-spacing:-.01em}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--pink);font-weight:700;font-size:1.4rem;line-height:1;flex:0 0 auto}
+  .faq details[open] summary::after{content:"−"}
+  .faq details p{margin:16px 0 0;font-size:1rem;color:var(--muted);font-weight:300;line-height:1.65}
+
+  /* final */
+  .final{text-align:center;padding:96px 0}
+  .final h2{margin-bottom:18px}
+  .final .sub{margin:0 auto 36px}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.55);padding:36px 0;font-size:.92rem;font-weight:300}
+  .foot-in{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;align-items:center}
+  .logo{font-family:var(--disp);font-weight:700;font-size:1.15rem;color:var(--white);letter-spacing:-.02em}
+  .logo i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;border-radius:50%;background:var(--pink);color:var(--white);font-size:.85rem;margin:0 1px}
+  footer a{color:rgba(255,255,255,.55);text-decoration:none}
+  footer a:hover{color:var(--white)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style><style>
+  /* pipeline */
+  .pipe{display:grid;gap:16px;margin-bottom:26px}
+  @media (min-width:900px){.pipe{grid-template-columns:repeat(4,1fr)}}
+  .step{background:var(--white);border-radius:18px;box-shadow:var(--shadow);padding:26px 22px;position:relative}
+  .step .n{font-family:var(--num);font-weight:700;font-size:.8rem;letter-spacing:.16em;color:var(--soft);display:block;margin-bottom:14px}
+  .step .ico{width:48px;height:48px;border-radius:14px;margin-bottom:16px}
+  .step .ico svg{width:23px;height:23px}
+  .step h3{font-size:1.2rem;font-weight:900;letter-spacing:-.02em;margin-bottom:6px}
+  .step p{font-size:.93rem;color:var(--muted);font-weight:300;margin:0;line-height:1.6}
+  .payoff{
+    background:var(--white);border-radius:18px;box-shadow:var(--shadow);
+    padding:28px 30px;border-top:4px solid var(--pink);
+  }
+  .payoff p:last-child{margin-bottom:0}
+  .payoff .quote{font-size:1.15rem;font-weight:700;letter-spacing:-.02em;margin:0 0 12px}
+</style>
+<style>
+  .cross{background:var(--surface-2);padding:0}
+  .crossbox{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    gap:20px 28px;padding:34px 28px;
+  }
+  .crossbox h3{font-size:1.45rem;font-weight:900;letter-spacing:-.03em;margin:0 0 6px}
+  .crossbox p{font-size:.98rem;color:var(--muted);font-weight:300;margin:0;max-width:60ch}
+  .crossbox .side{flex:1 1 320px}
+  .crossbox .btn{flex:0 0 auto}
+</style>
+
+
+<div class="rtl">
+
+  <div class="bar">
+    <div class="wrap bar-in">
+      <div>
+        <h2>סדנה פתוחה, רביעי 9 בספטמבר</h2>
+        <p>12 מקומות בלבד. זה המועד האחרון לפני החגים.</p>
+      </div>
+      <a class="cta-link" data-checkout data-product="workshop-api-2026-09-09" data-price="590" data-currency="ILS" data-seats="12" href="/api/checkout?product=workshop-api-2026-09-09">שמרו לי מקום</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">API Workshop &middot; Herzliya</span>
+        <h1>אייג'נט אחד.<br>אפס התקנות.<br><span class="grad">רץ לבד.</span></h1>
+        <p class="lede">רוב הכלים שאתם משלמים עליהם יודעים לדבר עם תוכנות אחרות. פשוט אף אחד לא הראה לכם איך. בשעתיים תבינו מה זה API, מתי הוא שווה את זה, ותבנו כלי אחד ש<b>ממשיך לעבוד גם אחרי שסגרתם את הלפטופ</b>.</p>
+        <div class="meta">
+          <div><span>Date</span><b>רביעי, 9.9</b></div>
+          <div><span>Time</span><b>10:00 עד 12:00</b></div>
+          <div><span>Where</span><b>אריה שנקר 1, הרצליה</b></div>
+          <div><span>Seats</span><b>12 בלבד</b></div>
+        </div>
+        <a class="btn cta-link" data-checkout data-product="workshop-api-2026-09-09" data-price="590" data-currency="ILS" data-seats="12" href="/api/checkout?product=workshop-api-2026-09-09">שמרו לי מקום</a>
+        <p class="btn-note">אין צורך בידע קודם ולא בסדנה קודמת. מתחילים מאפס.</p>
+      </div>
+
+      <div class="card">
+        <h3>הזקיף,<br>בארבעה צעדים</h3>
+        <p class="kicker">זה מה שתבנו. הוא יתעורר מחר ב-7 בלי שתעשו כלום.</p>
+        <div class="rowlist">
+          <div class="row">
+            <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></div>
+            <div><b>מושך</b><span>קורא ממקור חיצוני מה פורסם היום</span></div>
+          </div>
+          <div class="row">
+            <div class="ico t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h6"/><circle cx="18" cy="16" r="3"/></svg></div>
+            <div><b>שופט</b><span>AI מדרג כל פריט מול מה שהעסק שלכם עושה</span></div>
+          </div>
+          <div class="row">
+            <div class="ico g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></div>
+            <div><b>כותב</b><span>שומר הכל בגיליון שמצטבר לאורך זמן</span></div>
+          </div>
+          <div class="row">
+            <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+            <div><b>שולח</b><span>מייל אחד ביום עם מה שבאמת עבר את הסינון</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="numbers">
+    <div class="wrap nums">
+      <div><b>120</b><span>דקות, 53 מהן בנייה</span></div>
+      <div><b>0</b><span>התקנות, הכל בדפדפן</span></div>
+      <div><b>0 ₪</b><span>עלות הרצה חודשית</span></div>
+      <div><b>7:00</b><span>השעה שבה הוא מתעורר</span></div>
+    </div>
+  </div>
+
+  <section class="sec-pink">
+    <div class="wrap">
+      <span class="eyebrow">What you build</span>
+      <h2>הזקיף: הכלי שעושה את המעקב שאתם כבר שנה אומרים שתעשו</h2>
+      <p class="sub">כל מנהל יודע שהוא צריך לעקוב אחרי הענף, אחרי המתחרים ואחרי הרגולציה. כמעט אף אחד לא עושה את זה בפועל, כי זה עשרים דקות ביום שתמיד נדחות.</p>
+      <div class="pipe">
+        <div class="step">
+          <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></div>
+          <span class="n">01</span>
+          <h3>מושך</h3>
+          <p>פונה למקורות שאתם בוחרים ומקבל מהם את מה שפורסם ב-24 השעות האחרונות. זו הקריאה הראשונה שלכם ל-API.</p>
+        </div>
+        <div class="step">
+          <div class="ico t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h6"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <span class="n">02</span>
+          <h3>שופט</h3>
+          <p>שולח את הכל ל-AI בקריאה אחת, עם משפט שמתאר את העסק שלכם, ומקבל ציון והסבר לכל פריט. זו שכבת השיפוט.</p>
+        </div>
+        <div class="step">
+          <div class="ico g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></div>
+          <span class="n">03</span>
+          <h3>כותב</h3>
+          <p>מזרים הכל לגיליון גוגל שמצטבר. אחרי חודש יש לכם ארכיון של הענף שלכם, מדורג, שאף אחד לא הקליד.</p>
+        </div>
+        <div class="step">
+          <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+          <span class="n">04</span>
+          <h3>שולח</h3>
+          <p>מייל אחד בבוקר, רק מה שעבר את הרף. ואז מגדירים טריגר, וזהו: מכאן הוא עובד בלעדיכם.</p>
+        </div>
+      </div>
+      <div class="payoff">
+        <p class="quote">בשלב הזה קורה הדבר שבגללו באתם.</p>
+        <p>אתם סוגרים את הלפטופ, ולמחרת בבוקר מחכה לכם מייל שאף אחד לא כתב. זה ההבדל בין כלי שמשתמשים בו לבין אייג'נט שעובד בשבילכם, וברגע שמבינים אותו, אותו מבנה בדיוק עובד על כל דבר אחר בעסק.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">What you understand</span>
+      <h2>ומה שתיקחו איתכם גדול מהכלי</h2>
+      <p class="sub">הבנייה היא ההוכחה. אלה שלושת הדברים שישנו את איך שאתם מסתכלים על כל כלי שאתם כבר משלמים עליו.</p>
+      <div class="builds">
+        <div class="build">
+          <span class="n">01</span>
+          <h3>API הוא דלת שירות</h3>
+          <p class="tag">והיא כבר קיימת אצלכם</p>
+          <p>לכל מערכת יש כניסה ראשית לבני אדם, ודלת צדדית שדרכה תוכנה אחרת מבקשת את אותם דברים בלי אף אחד באמצע. תצאו מכאן ותבדקו לאילו מהכלים שלכם יש דלת כזאת. התשובה תפתיע אתכם.</p>
+        </div>
+        <div class="build">
+          <span class="n">02</span>
+          <h3>הכלל של שלוש הפעמים</h3>
+          <p class="tag">מתי זה שווה ומתי לא</p>
+          <p>לא כל דבר צריך אוטומציה. אם עשיתם משהו ידנית שלוש פעמים והתעצבנתם, הוא מועמד. אם עשיתם פעם אחת, או שיש כפתור ייצוא שגומר את זה, זה בזבוז זמן. הפרופורציה הזאת שווה יותר מהקוד.</p>
+        </div>
+        <div class="build">
+          <span class="n">03</span>
+          <h3>כתובת, מפתח, תשובה</h3>
+          <p class="tag">וזהו, זה כל מה שיש</p>
+          <p>לאן פונים, איך יודעים שזה אתם, ואיך נראה מה שחוזר. מי שמבין את שלושת אלה יכול לפתוח את התיעוד של כל שירות בעולם ולהבין מה אפשר לעשות איתו.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-teal">
+    <div class="wrap">
+      <span class="eyebrow">The run</span>
+      <h2>שעתיים, רובן בנייה</h2>
+      <p class="sub">חצי שעה של הבנה, ואז בונים בשלושה גלים. אף אחד לא כותב קוד לבד, ואף אחד לא רק מקשיב.</p>
+      <div class="flow">
+        <div><span class="t">10:00</span><span class="x">מה זה API, בלי ראשי תיבות</span><span class="n">מתחילים מהמייל שהזקיף שלי שלח הבוקר, ומשם אחורה: מה קרה שם בעצם.</span></div>
+        <div><span class="t">10:26</span><span class="x">שלושת הדברים והקמה</span><span class="n">פותחים גיליון, נכנסים לעורך, ומוציאים מפתח. שש דקות, כולם ביחד.</span></div>
+        <div><span class="t">10:39</span><span class="x">גל 1: הקריאה הראשונה</span><span class="n">כותרות אמיתיות מהאינטרנט מופיעות אצלכם על המסך. עדיין בלי AI.</span></div>
+        <div><span class="t">10:59</span><span class="x">גל 2: שכבת השיפוט</span><span class="n">אותן כותרות בדיוק, עכשיו מדורגות לפי מה שהעסק שלכם עושה.</span></div>
+        <div><span class="t">11:19</span><span class="x">גל 3: הפלט והטריגר</span><span class="n">הגיליון מתמלא, המייל נוחת, והטריגר נדלק. מכאן זה רץ לבד.</span></div>
+        <div><span class="t">11:37</span><span class="x">רשימת ה-APIs וסגירה</span><span class="n">אילו שירותים שווה להכיר, ומה הייתם בונים עם כל אחד מהם.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Who it is for</span>
+      <h2>למי זה מתאים, ולמי לא</h2>
+      <p class="sub">12 מקומות זה מעט, וחדר שמורכב נכון שווה יותר מחדר מלא.</p>
+      <div class="split">
+        <div class="box yes">
+          <h3>הסדנה בשבילכם אם</h3>
+          <ul>
+            <li>אתם שומעים את המילה API בישיבות ולא לגמרי בטוחים מה היא אומרת</li>
+            <li>יש לכם תהליך שאתם עושים ידנית כל שבוע ומעצבן אתכם</li>
+            <li>אתם משלמים על כלים ולא יודעים מה עוד אפשר להוציא מהם</li>
+            <li>אתם רוצים להבין מה בכלל אפשר לאוטומט לפני שאתם מזמינים מפתח</li>
+          </ul>
+        </div>
+        <div class="box no">
+          <h3>הסדנה לא בשבילכם אם</h3>
+          <ul>
+            <li>אתם מפתחים. תשתעממו, וזה בסדר</li>
+            <li>אתם מחפשים סקירה של כלי אוטומציה בשוק</li>
+            <li>אתם מעדיפים לשבת ולהקשיב. פה בונים כל הזמן</li>
+            <li>אתם לא מוכנים לפתוח חשבון גוגל ולתת הרשאות לקוד שאתם עצמכם מריצים</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="narrow">
+      <span class="eyebrow">Who runs it</span>
+      <h2>מי שבונה את זה בפועל, לא מי שמרצה על זה</h2>
+      <p><strong>לי גורדון, מייסדת GR8MINDS.</strong> בונה סוכני AI, אוטומציות ומערכות לארגונים. הסדנה מעבירה בדיוק את מה שהיא עושה בעבודה, על אותם כלים ובאותה שיטה.</p>
+      <p>הזקיף שתבנו הוא גרסה מוקטנת של מערכות שרצות היום אצל לקוחות: אותו מבנה בדיוק, רק שבמקום מקורות ציבוריים הן מחוברות ל-CRM, למערכת ההזמנות ולתיבה של הצוות.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <span class="eyebrow">Before you come</span>
+      <h2>מה צריך להביא</h2>
+      <p class="sub">שתי דקות הכנה, ואנחנו מתחילים לבנות בדקה הארבעים.</p>
+      <div class="need">
+        <ul>
+          <li>לפטופ טעון ומטען. אי אפשר להשתתף מהטלפון</li>
+          <li>חשבון גוגל שאתם מחוברים אליו בדפדפן. זה הכל, אין שום דבר להתקין ואין למה להירשם</li>
+          <li>תהליך אחד שאתם עושים ידנית כל שבוע ומעצבן אתכם. נשתמש בו</li>
+          <li>שום ידע בתכנות. הקוד מחולק מוכן, ואתם משנים בו שדות</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-gold">
+    <div class="narrow">
+      <div class="price">
+        <span class="eyebrow">Seats</span>
+        <h2>מחיר ומקומות</h2>
+        <div class="amount">590 ש"ח</div>
+        <p class="seats">המחיר לפני מע"מ. 12 מקומות בסך הכל.</p>
+        <a class="btn cta-link" data-checkout data-product="workshop-api-2026-09-09" data-price="590" data-currency="ILS" data-seats="12" href="/api/checkout?product=workshop-api-2026-09-09">שמרו לי מקום</a>
+        <p class="fine">התשלום מראש ומבטיח את המקום. ביטול עד 48 שעות לפני מזכה בהחזר מלא.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="narrow">
+      <span class="eyebrow">FAQ</span>
+      <h2>שאלות שנשאלות</h2>
+      <div class="faq" style="margin-top:36px">
+        <details>
+          <summary>אני לא מתכנת. זה באמת מתאים לי?</summary>
+          <p>כן. הקוד מחולק מוכן ומודפס, ואתם משנים בו ארבעה שדות: מה העסק שלכם עושה, אילו מקורות לעקוב אחריהם, מה הרף, ולאן לשלוח. כל השאר כבר כתוב. מי שיודע לערוך תא בגיליון יסתדר.</p>
+        </details>
+        <details>
+          <summary>זה באמת בחינם? מה העלות אחרי הסדנה?</summary>
+          <p>אפס. הכלי רץ על השרתים של גוגל בתוך החשבון שלכם, המקורות פתוחים, ומפתח ה-AI שנשתמש בו הוא בשכבה חינמית שמספיקה בקלות לשימוש יומי. אין מנוי ואין כרטיס אשראי בשום שלב.</p>
+        </details>
+        <details>
+          <summary>הכלי ימשיך לרוץ אחרי שאלך הביתה?</summary>
+          <p>כן, וזו כל הנקודה. בסוף הסדנה מדליקים טריגר יומי, ומאותו רגע הוא מתעורר לבד כל בוקר ושולח לכם מייל. אתם לא צריכים לפתוח כלום.</p>
+        </details>
+        <details>
+          <summary>צריך להיות בסדנת האייג'נטים הראשונה קודם?</summary>
+          <p>לא. השתיים עצמאיות ומתחילות מאפס. הראשונה בונה כלים שקוראים את המידע שלכם, וזאת בונה כלי שיוצא החוצה ורץ לבד. מי שהיה בשתיהן מקבל תמונה שלמה, אבל אפשר להתחיל מכל אחת.</p>
+        </details>
+        <details>
+          <summary>מה עם המידע והאבטחה?</summary>
+          <p>הקוד רץ בחשבון הגוגל שלכם ובהרשאות שלכם, ומה שהוא קורא הם מקורות ציבוריים. אני לא רואה את הגיליון ולא את המייל שלכם, ואין שרת שלי באמצע.</p>
+        </details>
+        <details>
+          <summary>אפשר להעביר את הסדנה אצלנו בחברה?</summary>
+          <p>כן, וזו הגרסה המעניינת יותר. בארגון אנחנו לא בונים על מקורות ציבוריים אלא על המערכות שלכם בפנים. שלוש שעות, עד 15 משתתפים. דברו איתי ואשלח פרטים.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="final sec-pink">
+    <div class="narrow">
+      <h2>מחר בבוקר מישהו יעשה את העבודה במקומכם</h2>
+      <p class="sub">שעתיים, אייג'נט אחד, ומייל שממשיך להגיע.</p>
+      <a class="btn cta-link" data-checkout data-product="workshop-api-2026-09-09" data-price="590" data-currency="ILS" data-seats="12" href="/api/checkout?product=workshop-api-2026-09-09">שמרו לי מקום</a>
+      <p class="btn-note">רביעי 9 בספטמבר, 10:00 עד 12:00, אריה שנקר 1 הרצליה.</p>
+    </div>
+  </div>
+
+
+  <div class="cross">
+    <div class="narrow crossbox">
+      <div class="side">
+        <span class="eyebrow">Also this week</span>
+        <h3>שלושה אייג'נטים בשעתיים</h3>
+        <p>יומיים לפני זו, בשני 7.9, באותו מקום ובאותה שעה. שם בונים שלושה כלים שקוראים את היומן והמייל שלכם ומסדרים לכם את היום. השתיים עצמאיות, ואפשר לבוא לאחת או לשתיהן.</p>
+      </div>
+      <a class="btn ghost" href="/agents">לפרטים על סדנת האייג'נטים</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap foot-in">
+      <span class="logo">GR<i>8</i>MINDS</span>
+      <span><a href="mailto:ai@gr8minds.co.il">ai@gr8minds.co.il</a> &middot; <a href="https://gr8minds.co.il">gr8minds.co.il</a></span>
+    </div>
+  </footer>
+
+</div>
+
+<script type="module" src="/assets/checkout.js"></script>
+</body>
+</html>

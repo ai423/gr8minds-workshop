@@ -3,15 +3,17 @@
 //
 //   CARDCOM_TERMINAL   מספר מסוף        (required)
 //   CARDCOM_API_NAME   שם משתמש ל-API   (required)
-//   WORKSHOP_PRICE_ILS total incl. VAT   (default 590)
 //   CARDCOM_OPERATION  ChargeAndCreateDocument | ChargeOnly
-//   SITE_URL           canonical https origin, e.g. https://workshop.gr8minds.co.il
+//   SITE_URL           canonical https origin, e.g. https://workshops.gr8minds.co.il
+
+import { byId } from '../workshops.js';
 
 const CARDCOM_API = 'https://secure.cardcom.solutions/api/v11/LowProfile/Create';
-
-const PRODUCT = 'סדנת שלושה אייג׳נטים · 2 בספטמבר 2026';
-const PRODUCT_ID = 'workshop-agents-2026-09-02';
 const ILS = 1; // Cardcom ISOCoinId for shekel
+
+// The catalogue is the authority on price. The page sends only a product id —
+// a browser can edit data-price, so that value is never trusted or read here.
+// Adding a workshop means adding an entry to workshops.js, not touching this file.
 
 function origin(req) {
   if (process.env.SITE_URL) return process.env.SITE_URL.replace(/\/+$/, '');
@@ -32,9 +34,7 @@ function readBody(req) {
   return b;
 }
 
-function clean(v, max) {
-  return String(v ?? '').trim().slice(0, max);
-}
+const clean = (v, max) => String(v ?? '').trim().slice(0, max);
 
 export default async function handler(req, res) {
   const terminal = process.env.CARDCOM_TERMINAL;
@@ -49,14 +49,22 @@ export default async function handler(req, res) {
   }
 
   const body = readBody(req);
+
+  // A GET (the no-JS fallback link) carries the product in the query string.
+  const url = new URL(req.url, 'http://localhost');
+  const productId = clean(body.product || url.searchParams.get('product'), 60);
+  const product = byId(productId);
+
+  if (!product) {
+    return res.status(400).json({
+      error: 'unknown_product',
+      message: 'הסדנה המבוקשת לא נמצאה. רעננו את העמוד ונסו שוב.',
+    });
+  }
+
   const name = clean(body.name, 80);
   const email = clean(body.email, 120);
   const phone = clean(body.phone, 30);
-
-  const amount = Number(process.env.WORKSHOP_PRICE_ILS || 590);
-  if (!Number.isFinite(amount) || amount <= 0) {
-    return res.status(500).json({ error: 'bad_price' });
-  }
 
   // ChargeAndCreateDocument needs a name + email to issue the invoice against.
   const canInvoice = Boolean(name && email);
@@ -65,19 +73,19 @@ export default async function handler(req, res) {
     (canInvoice ? 'ChargeAndCreateDocument' : 'ChargeOnly');
 
   const base = origin(req);
-  const orderId = `${PRODUCT_ID}-${crypto.randomUUID().slice(0, 8)}`;
+  const orderId = `${productId}-${crypto.randomUUID().slice(0, 8)}`;
 
   const payload = {
     TerminalNumber: Number(terminal),
     ApiName: apiName,
     Operation: operation,
-    Amount: amount,
+    Amount: product.price,
     ISOCoinId: ILS,
     Language: 'he',
-    ProductName: PRODUCT,
+    ProductName: product.invoiceName,
     ReturnValue: orderId,
-    SuccessRedirectUrl: `${base}/thanks.html`,
-    FailedRedirectUrl: `${base}/?payment=failed`,
+    SuccessRedirectUrl: `${base}/thanks?w=${product.slug}`,
+    FailedRedirectUrl: `${base}/${product.slug}?payment=failed`,
     WebHookUrl: `${base}/api/cardcom-webhook`,
   };
 
@@ -88,7 +96,7 @@ export default async function handler(req, res) {
       Email: email || undefined,
       Phone: phone || undefined,
       IsSendByEmail: Boolean(email),
-      Products: [{ Description: PRODUCT, UnitCost: amount, Quantity: 1 }],
+      Products: [{ Description: product.invoiceName, UnitCost: product.price, Quantity: 1 }],
     };
   }
 
@@ -117,8 +125,8 @@ export default async function handler(req, res) {
 
   console.log('checkout created', orderId, data.LowProfileId);
 
-  // Browsers that posted a plain form (or followed a link) get a redirect;
-  // the on-page modal asks for JSON and redirects itself.
+  // Browsers that followed the plain link get a redirect; the on-page modal
+  // asks for JSON and redirects itself.
   const wantsJson = (req.headers.accept || '').includes('application/json');
   if (wantsJson) return res.status(200).json({ url: data.Url });
   res.writeHead(303, { Location: data.Url });

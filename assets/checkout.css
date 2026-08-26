@@ -1,0 +1,35 @@
+/* Registration modal. Shared by every workshop page; inherits the page's own
+   design tokens (--pink, --ink, --line ...) so it matches whatever page it
+   is dropped into. */
+.modal[hidden]{display:none}
+.modal{position:fixed;inset:0;z-index:90;display:flex;align-items:center;
+  justify-content:center;padding:20px}
+.modal-backdrop{position:absolute;inset:0;background:rgba(15,15,30,.6);
+  backdrop-filter:blur(3px)}
+.modal-card{position:relative;background:var(--white,#fff);border-radius:22px;
+  padding:34px 30px 26px;width:min(430px,100%);box-shadow:var(--shadow);
+  max-height:92vh;overflow:auto;animation:modal-in .18s ease-out}
+@keyframes modal-in{from{opacity:0;transform:translateY(12px)}}
+@media (prefers-reduced-motion:reduce){.modal-card{animation:none}}
+.modal-card h3{font-family:var(--body);font-weight:900;font-size:1.5rem;
+  letter-spacing:-.03em;margin:0 0 6px}
+.modal-sub{color:var(--muted);font-size:.95rem;margin:0 0 20px;font-weight:300}
+.modal-x{position:absolute;inset-inline-end:16px;top:12px;border:0;
+  background:none;font-size:1.8rem;line-height:1;color:var(--soft);
+  cursor:pointer;padding:4px}
+.modal-x:hover{color:var(--ink)}
+.modal form label{display:block;font-size:.9rem;font-weight:700;
+  margin-bottom:14px;color:var(--ink)}
+.modal form input{display:block;width:100%;margin-top:6px;padding:12px 14px;
+  border:1.5px solid var(--line);border-radius:12px;font:inherit;
+  font-size:1rem;font-weight:400;background:var(--white,#fff);color:var(--ink)}
+.modal form input:focus{outline:none;border-color:var(--pink);
+  box-shadow:0 0 0 3px rgba(255,31,142,.14)}
+.modal form .btn{width:100%;margin-top:6px;border:0;cursor:pointer;
+  display:block;text-align:center}
+.modal form .btn[disabled]{opacity:.6;cursor:progress}
+.modal-err{background:var(--tint-pink);color:var(--pink-deep);
+  border-radius:10px;padding:10px 12px;font-size:.88rem;margin:0 0 12px;
+  font-weight:400}
+.modal-fine{color:var(--soft);font-size:.8rem;line-height:1.6;
+  margin:14px 0 0;text-align:center;font-weight:300}
