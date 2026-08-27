@@ -15,7 +15,8 @@
 | `assets/checkout.js` | מודאל ההרשמה, משותף לכל עמודי הסדנאות |
 | `assets/checkout.css` | העיצוב של המודאל |
 | `api/checkout.js` | יוצר עסקת LowProfile בקארדקום ומפנה לדף התשלום |
-| `api/cardcom-webhook.js` | מקבל הודעת תשלום ומאמת אותה מול השרת |
+| `api/cardcom-webhook.js` | מקבל הודעת תשלום, מאמת אותה, ורושם את הנרשם |
+| `apps-script/Code.gs` | יושב בגוגל שיטס. רושם שורה ושולח מייל אישור |
 | `vercel.json` | `cleanUrls`, `trailingSlash`, כותרות אבטחה |
 
 **למה `apis` ולא `api`:** הנתיב `/api` שמור בוורסל לפונקציות שרת. אל תשנו את השם.
@@ -40,7 +41,7 @@
   whenShort: 'שלישי 3 בנובמבר, 10:00 עד 12:00, אריה שנקר 1 הרצליה.',
   place: 'אריה שנקר 1, הרצליה',
   price: 590,                            // הסכום שנגבה בפועל
-  priceNote: 'לפני מע"מ',
+  priceNote: 'כולל מע"מ',
   seats: 12,
   invoiceName: 'שם הסדנה · 3 בנובמבר 2026',   // מה שיופיע בחשבונית
 }
@@ -89,6 +90,8 @@ sed -i '' 's/workshop-agents-2026-09-07/workshop-xyz-2026-11-03/g' xyz/index.htm
 | `CARDCOM_API_NAME` | כן | — | שם משתמש ל-API |
 | `CARDCOM_OPERATION` | לא | `ChargeAndCreateDocument` | או `ChargeOnly` בלי הפקת מסמך |
 | `SITE_URL` | מומלץ | הדומיין של הבקשה | `https://workshops.gr8minds.co.il`, בלי לוכסן בסוף |
+| `SHEET_WEBHOOK_URL` | לא | — | כתובת ה-Apps Script שרושם לגיליון ושולח מייל |
+| `SHEET_WEBHOOK_TOKEN` | לא | — | סיסמה משותפת שהסקריפט בודק |
 
 המחירים **לא** באים ממשתני סביבה אלא מ-`workshops.js`, כדי שסדנה ומחיר יישבו יחד.
 
@@ -103,6 +106,7 @@ sed -i '' 's/workshop-agents-2026-09-07/workshop-xyz-2026-11-03/g' xyz/index.htm
 4. הדפדפן עובר לדף המאובטח של קארדקום. פרטי אשראי לא עוברים דרכנו.
 5. בהצלחה קארדקום מחזיר ל-`/thanks?w=<slug>` ושולח webhook ל-`/api/cardcom-webhook`,
    שמאמת את העסקה מול `LowProfile/GetLpResult` ולא סומך על גוף ה-webhook.
+   רק אחרי האימות הנרשם נכתב לגיליון ומקבל מייל. ראו `apps-script/README.md`.
 6. בכישלון חוזרים ל-`/<slug>?payment=failed` והמודאל נפתח עם הודעה.
 
 בלי JavaScript הכפתורים עדיין מובילים לתשלום (`ChargeOnly`, בלי פרטי חשבונית).
