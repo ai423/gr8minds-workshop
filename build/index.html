@@ -169,7 +169,11 @@
 
   /* instrument cards */
   .instruments{display:grid;gap:22px}
-  @media (min-width:900px){.instruments{grid-template-columns:repeat(3,1fr)}}
+  @media (min-width:760px){.instruments{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1060px){.instruments{grid-template-columns:repeat(4,1fr)}}
+  @media (min-width:1060px){.instruments .inst{padding:28px 24px}
+    .instruments .inst h3{font-size:1.6rem}
+    .instruments .inst > p{font-size:.93rem}}
   .inst{background:var(--white);border-radius:20px;box-shadow:var(--shadow);padding:34px 30px;display:flex;flex-direction:column}
   .inst .ico{width:54px;height:54px;border-radius:16px;margin-bottom:22px}
   .inst .ico svg{width:26px;height:26px}
@@ -267,7 +271,11 @@
 </style><style>
   /* pipeline */
   .pipe{display:grid;gap:16px;margin-bottom:26px}
-  @media (min-width:900px){.pipe{grid-template-columns:repeat(4,1fr)}}
+  @media (min-width:760px){.pipe{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1060px){.pipe{grid-template-columns:repeat(5,1fr)}}
+  @media (min-width:1060px){.pipe .step{padding:26px 20px}
+    .pipe .step h3{font-size:1.5rem}
+    .pipe .step > p{font-size:.92rem}}
   .step{background:var(--white);border-radius:18px;box-shadow:var(--shadow);padding:26px 22px;position:relative}
   .step .n{font-family:var(--num);font-weight:700;font-size:.8rem;letter-spacing:.16em;color:var(--soft);display:block;margin-bottom:14px}
   .step .ico{width:48px;height:48px;border-radius:14px;margin-bottom:16px}
@@ -297,7 +305,15 @@
 <style>
   /* ---------- two price tiers ---------- */
   .tiers{display:grid;gap:22px;grid-template-columns:1fr}
-  @media (min-width:820px){.tiers{grid-template-columns:1fr 1fr;align-items:start}}
+  /* On one column the paid option leads, and the anchor sits last. */
+  @media (max-width:759px){.tier{order:2}.tier:not(.alt){order:1}.tier.anchor{order:3}}
+  @media (min-width:760px){.tiers{grid-template-columns:1fr 1fr}}
+  @media (min-width:1040px){.tiers{grid-template-columns:repeat(3,1fr)}}
+  @media (min-width:1040px){.tier{padding:34px 24px}
+    .tier .amount{font-size:clamp(2.1rem,3.4vw,2.7rem)}
+    .tier li{font-size:.93rem}
+    .tier .btn{white-space:nowrap;font-size:.98rem;padding:16px 18px}
+    .tier .fine{font-size:.82rem}}
   .tier{background:var(--grad);color:var(--white);border-radius:24px;padding:36px 30px;
     box-shadow:var(--shadow);display:flex;flex-direction:column}
   .tier.alt{background:var(--white);color:var(--ink)}
@@ -306,7 +322,7 @@
     letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:100px;
     margin-bottom:18px}
   .tier.alt .badge{background:var(--tint-teal);color:var(--teal)}
-  .tier .amount{font-family:var(--disp);font-weight:700;font-size:clamp(2.8rem,7vw,3.8rem);
+  .tier .amount{white-space:nowrap;font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,7vw,3.4rem);
     line-height:1;letter-spacing:-.05em;margin:0 0 6px}
   .tier .amount small{font-size:.45em;font-weight:700;letter-spacing:0}
   .tier .note{font-size:.95rem;opacity:.9;margin:0 0 22px;font-weight:300}
@@ -353,8 +369,8 @@
       </div>
 
       <div class="card">
-        <h3>שלוש הבטחות,<br>ושעון קשיח</h3>
-        <p class="kicker">כל שעה נגמרת בנקודת ביקורת שנבדקת בקול מול החדר.</p>
+        <h3>שלוש הבטחות,<br>אחת לכל שעה</h3>
+        <p class="kicker">בסוף כל שעה עוצרים רגע ובודקים ביחד שהגענו לשם.</p>
         <div class="rowlist">
           <div class="row">
             <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg></div>
@@ -386,42 +402,42 @@
     <div class="wrap">
       <span class="eyebrow">The thesis</span>
       <h2>הקוד כבר לא החסם</h2>
-      <p class="sub">החסם הוא לדעת מה לבנות, לנסח את זה נכון, ולהוביל את הבנייה עד לכלי שבאמת עובד. זו לא סדנת פרומפטים ולא קורס תכנות, וזה בדיוק הפער שסוגרים כאן.</p>
+      <p class="sub">מה שחסר זה לדעת מה בכלל לבנות, איך לבקש את זה, ואיך להביא את זה עד כלי שבאמת עובד. זו לא סדנת פרומפטים ולא קורס תכנות. זה הפער, ואותו סוגרים כאן.</p>
       <div class="pipe">
         <div class="step">
           <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 15s1.5-2 4-2 4 2 4 2M9 9h.01M15 9h.01"/></svg></div>
           <span class="n">01</span>
           <h3>כאב</h3>
-          <p>משפט אחד שמתחיל ב"הלוואי שהיה אפשר". לא רעיון למוצר, לא מערכת. רגע אחד ביום שמעצבן אתכם.</p>
+          <p>משפט אחד שמתחיל ב"הלוואי שהיה אפשר". לא רעיון למוצר. רגע אחד ביום שמעצבן אתכם.</p>
         </div>
         <div class="step">
           <div class="ico t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg></div>
           <span class="n">02</span>
           <h3>אפיון</h3>
-          <p>כרטיס של עמוד אחד שממלאים בכתב יד לפני שנוגעים במקלדת: מי משתמש, באיזה רגע, מה נכנס, מה יוצא, ומה הכלי <b>לא</b> עושה.</p>
+          <p>עמוד אחד בכתב יד, לפני שנוגעים במקלדת: מי משתמש, מתי, מה נכנס, מה יוצא, ומה הכלי <b>לא</b> עושה.</p>
         </div>
         <div class="step">
           <div class="ico g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg></div>
           <span class="n">03</span>
           <h3>פריסה</h3>
-          <p>קודם מעלים כלי ריק לאוויר, ורק אחר כך בונים. מהרגע הזה כל שינוי שתעשו נמצא באינטרנט תוך דקה.</p>
+          <p>קודם מעלים כלי ריק לאוויר, ורק אז בונים. מכאן כל שינוי שלכם באינטרנט תוך דקה.</p>
         </div>
         <div class="step">
           <div class="ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0 5 5L21 21H3l8.7-8.7a4 4 0 0 0 5-5z"/></svg></div>
           <span class="n">04</span>
           <h3>בנייה ותיקון</h3>
-          <p>בקשה אחת, תוכנית, אישור, ועוד גרסה באוויר. וכשמשהו נשבר, הלוג עצמו הוא הפרומפט הבא.</p>
+          <p>בקשה אחת, תוכנית, אישור, גרסה חדשה באוויר. וכשמשהו נשבר, הלוג הוא הפרומפט הבא.</p>
         </div>
         <div class="step">
           <div class="ico t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></div>
           <span class="n">05</span>
           <h3>שירוץ לבד</h3>
-          <p>מי שהכלי שלו תלוי בזמן מוסיף תזמון, והוא ממשיך לעבוד כל בוקר בלי שאף אחד פותח אותו.</p>
+          <p>מוסיפים תזמון, והכלי ממשיך לעבוד כל בוקר בלי שאף אחד פותח אותו.</p>
         </div>
       </div>
       <div class="payoff">
         <p class="quote">כלי טוב עושה דבר אחד, ברגע אחד, למשתמש אחד.</p>
-        <p>"מערכת" היא הרבה כלים, ואותה בונים אחר כך, אחד אחד. רוב האנשים נתקעים כי הם מנסים לבנות את הכל בבת אחת, וזו בדיוק הנקודה שבה הסדנה עוצרת אתכם.</p>
+        <p>"מערכת" היא הרבה כלים, ובונים אותה אחד־אחד. רוב האנשים נתקעים כי הם מנסים הכל בבת אחת, ואז שום דבר לא עולה לאוויר. כאן מתחילים מהכלי הראשון, מוציאים אותו, וממשיכים משם.</p>
       </div>
     </div>
   </section>
@@ -430,7 +446,7 @@
     <div class="wrap">
       <span class="eyebrow">What you leave with</span>
       <h2>מה יוצא איתכם מהחדר</h2>
-      <p class="sub">לא מצגת ולא הקלטה. ארבעה דברים שנשארים אצלכם.</p>
+      <p class="sub">לא מצגת, לא הקלטה, ולא רשימת כלים להסתכל עליה. ארבעה דברים שנשארים אצלכם.</p>
       <div class="instruments">
 
         <div class="inst">
@@ -438,7 +454,7 @@
           <span class="n">01</span>
           <h3>כלי חי</h3>
           <p class="tag">בכתובת שלכם, עם הקוד שלכם</p>
-          <p>אפליקציה פרוסה בכתובת אינטרנט משלכם, בעברית ומותאמת למובייל, שאפשר לשלוח בוואטסאפ למנהל ושהוא ייפתח אצלו בטלפון.</p>
+          <p>כתובת אינטרנט משלכם, בעברית ובמובייל. אפשר לשלוח אותה בוואטסאפ, והיא נפתחת אצל מי שקיבל אותה.</p>
         </div>
 
         <div class="inst">
@@ -446,7 +462,7 @@
           <span class="n">02</span>
           <h3>כרטיס אפיון</h3>
           <p class="tag">שהוא גם הפרומפט של הכלי הבא</p>
-          <p>המבנה שהופך "הלוואי שהיה אפשר" לכלי שאפשר לבנות. אחרי שמילאתם אחד, כל כלי הבא מתחיל מהדף הזה.</p>
+          <p>הדף שהופך "הלוואי שהיה אפשר" למשהו שאפשר לבנות. אחרי שמילאתם אחד, כל כלי הבא מתחיל ממנו.</p>
         </div>
 
         <div class="inst">
@@ -454,7 +470,7 @@
           <span class="n">03</span>
           <h3>עשרת הכללים</h3>
           <p class="tag">עמוד אחד, בלי להיתקע</p>
-          <p>דבר אחד בכל בקשה. תוכנית לפני קוד. בודקים בכתובת ולא בקוד. הלוג הוא הפרומפט. הכללים שמפרידים בין מי שמתקדם למי שנתקע.</p>
+          <p>דבר אחד בכל בקשה. תוכנית לפני קוד. בודקים בכתובת ולא בקוד. אלה הכללים שעושים את ההבדל בין להתקדם לבין להיתקע.</p>
         </div>
 
         <div class="inst">
@@ -462,7 +478,7 @@
           <span class="n">04</span>
           <h3>"הבא בתור"</h3>
           <p class="tag">מפת המשך אישית</p>
-          <p>רשימה כתובה של מה שלא נכנס לשלוש השעות, ולידה מה דורש בסיס נתונים, מה דורש אוטומציה, ומה שווה לבנות קודם.</p>
+          <p>מה שלא נכנס לשלוש השעות, כתוב. ולידו מה שווה לבנות קודם, ומה כבר דורש עזרה.</p>
         </div>
 
       </div>
@@ -472,18 +488,18 @@
   <section class="sec-teal">
     <div class="wrap">
       <span class="eyebrow">The run</span>
-      <h2>שלוש שעות, שעון קשיח</h2>
-      <p class="sub">מה שלא נגמר בזמן עובר ל"הבא בתור" שלכם, ולא לחריגה בזמן. זה מה שמבטיח שכולם מסיימים עם כלי.</p>
+      <h2>איך נראות שלוש השעות</h2>
+      <p class="sub">רוב הזמן הוא בנייה. מה שלא נכנס נרשם ל"הבא בתור" וממשיכים, וככה כולם מסיימים עם כלי ביד.</p>
       <div class="flow">
-        <div><span class="t">09:30</span><span class="x">הסיפור של Triage</span><span class="n">מערכת אמיתית שבניתי לבד, חיה על המסך. מאיפה היא התחילה, ולמה היא התחילה ממשפט אחד.</span></div>
-        <div><span class="t">09:45</span><span class="x">מהכאב לאפיון</span><span class="n">ממלאים את כרטיס האפיון בכתב יד, מחדדים אותו מול Claude, ובודקים אותו בזוגות. אף אחד לא נוגע במקלדת לפני שיש כרטיס.</span></div>
-        <div><span class="t">10:05</span><span class="x">מעלים כלי ריק לאוויר</span><span class="n">הרגע הכי חשוב בסדנה: יש לכם כתובת. מכאן כל שינוי נמצא באינטרנט.</span></div>
-        <div><span class="t">10:20</span><span class="x">הפסקה</span><span class="n">מי שנתקע בפריסה, זה הזמן שלו איתי.</span></div>
-        <div><span class="t">10:30</span><span class="x">בנייה</span><span class="n">הבלוק הארוך. בקשה, תוכנית, אישור, גרסה חדשה באוויר, ושוב. שלוש תחנות ביניים בדרך.</span></div>
-        <div><span class="t">11:20</span><span class="x">מה נשבר, ומה עושים</span><span class="n">לוקחים תקלה אמיתית מהחדר ומתקנים אותה מול כולם. כל דבר שנשבר משאיר לוג, וכל לוג הוא פרומפט.</span></div>
-        <div><span class="t">11:35</span><span class="x">לגרום לזה לרוץ לבד</span><span class="n">תזמון, וזה מה שמפריד בין כלי שפותחים לבין כלי שעובד בלעדיכם. ואז מפת ההמשך.</span></div>
-        <div><span class="t">12:00</span><span class="x">הצגות</span><span class="n">90 שניות לכל אחד: הכאב, מה הכלי עושה עכשיו, ומה הבא בתור. מראים בכתובת, לא מספרים.</span></div>
-        <div><span class="t">12:20</span><span class="x">סיום</span><span class="n">עשרת הכללים, וחזרה על שלוש ההבטחות כדי לבדוק אותן בקול.</span></div>
+        <div><span class="t">09:30</span><span class="x">הסיפור של Triage</span><span class="n">מערכת אמיתית שבניתי לבד, על המסך. מאיפה היא התחילה.</span></div>
+        <div><span class="t">09:45</span><span class="x">מהכאב לאפיון</span><span class="n">ממלאים את הכרטיס בכתב יד ומחדדים אותו מול Claude. אף אחד לא נוגע במקלדת לפני שיש כרטיס.</span></div>
+        <div><span class="t">10:05</span><span class="x">מעלים כלי ריק לאוויר</span><span class="n">הרגע הכי חשוב בסדנה: יש לכם כתובת.</span></div>
+        <div><span class="t">10:20</span><span class="x">הפסקה</span><span class="n">מי שנתקע, זה הזמן שלו איתי.</span></div>
+        <div><span class="t">10:30</span><span class="x">בנייה</span><span class="n">הבלוק הארוך. בקשה, תוכנית, אישור, גרסה חדשה באוויר, ושוב.</span></div>
+        <div><span class="t">11:20</span><span class="x">מה נשבר, ומה עושים</span><span class="n">לוקחים תקלה אמיתית מהחדר ומתקנים אותה מול כולם.</span></div>
+        <div><span class="t">11:35</span><span class="x">לגרום לזה לרוץ לבד</span><span class="n">תזמון, וזה ההבדל בין כלי שפותחים לכלי שעובד בלעדיכם.</span></div>
+        <div><span class="t">12:00</span><span class="x">הצגות</span><span class="n">90 שניות לכל אחד, ומראים בכתובת. לא מספרים.</span></div>
+        <div><span class="t">12:20</span><span class="x">סיום</span><span class="n">עשרת הכללים, ובדיקה בקול של שלוש ההבטחות.</span></div>
       </div>
     </div>
   </section>
@@ -492,24 +508,24 @@
     <div class="wrap">
       <span class="eyebrow">Who it is for</span>
       <h2>למי זה מתאים, ולמי לא</h2>
-      <p class="sub">10 מקומות זה מעט, וחדר שמורכב נכון שווה יותר מחדר מלא.</p>
+      <p class="sub">יש עשרה מקומות, ואני מעדיפה חדר קטן שמתאים על חדר מלא.</p>
       <div class="split">
         <div class="box yes">
           <h3>הסדנה בשבילכם אם</h3>
           <ul>
-            <li>אתם מנהלים או בעלי עסק בחברה של 10 עד 200 עובדים, בלי צוות פיתוח פנוי</li>
-            <li>יש לכם "כלי שחסר" ואתם מחכים כבר חודשים שמישהו יבנה אותו</li>
-            <li>אתם כבר משתמשים ב-Claude או ChatGPT, ומרגישים שנתקעתם ברמת הצ'אט</li>
-            <li>אתם מוכנים להצטמצם לכלי אחד שעושה דבר אחד, במקום לדמיין מערכת</li>
+            <li>אתם בעלי עסק, סולופאונדרים, פרילנסרים או מנהלים בארגון. הגודל לא משנה, גם אם אתם לבד</li>
+            <li>יש משהו שאתם עושים ידנית כל שבוע, וכבר חודשים אומרים שצריך לבנות לזה כלי</li>
+            <li>אתם כבר עובדים עם Claude או ChatGPT, ומרגישים שנתקעתם ברמת הצ'אט</li>
+            <li>אתם מוכנים להתחיל מכלי אחד שעושה דבר אחד, במקום לחכות למערכת שלמה</li>
           </ul>
         </div>
         <div class="box no">
           <h3>הסדנה לא בשבילכם אם</h3>
           <ul>
-            <li>אתם מחפשים סקירה של כלי ה-AI החדשים בשוק</li>
-            <li>אתם מפתחים ורוצים לצלול לארכיטקטורה</li>
+            <li>אתם רוצים סקירה על כלי ה-AI החדשים. פה בונים, לא סוקרים</li>
+            <li>אתם מפתחים ובאים לצלול לארכיטקטורה</li>
             <li>אתם מעדיפים לשבת ולהקשיב. פה בונים 90 דקות ברצף</li>
-            <li>אתם מצפים לצאת עם מערכת שלמה. יוצאים עם כלי אחד עובד, וזו המטרה</li>
+            <li>אתם רוצים לצאת עם מערכת שלמה. יוצאים מכאן עם כלי אחד שעובד, וזה בכוונה</li>
           </ul>
         </div>
       </div>
@@ -519,35 +535,50 @@
   <section class="sec-gold">
     <div class="narrow">
       <span class="eyebrow">Price</span>
-      <h2>מחיר ומקומות</h2>
-      <p class="sub">שתי דרכים להיכנס. שתיהן אותה סדנה, אותו מהלך ואותו כלי בסוף.</p>
+      <h2>כמה זה עולה</h2>
+      <p class="sub">שלוש דרכים להיכנס לאותה סדנה. בכולן יוצאים עם כלי עובד בכתובת משלכם.</p>
       <div class="tiers">
+
+        <div class="tier alt anchor">
+          <span class="badge">אחד על אחד</span>
+          <div class="amount">2,900 <small>&#8362;</small></div>
+          <p class="note">כולל מע"מ, שלוש שעות</p>
+          <ul>
+            <li>רק אתם ואני, אצלכם או בזום</li>
+            <li>בתאריך שנוח לכם, לא בתאריך של הסדנה</li>
+            <li>עובדים על הכלי שלכם כבר מהדקה הראשונה</li>
+            <li>שבועיים אחרי, שיחה נוספת לסגירת מה שנתקע</li>
+          </ul>
+          <a class="btn ghost" href="mailto:ai@gr8minds.co.il?subject=%D7%A1%D7%93%D7%A0%D7%94%20%D7%90%D7%99%D7%A9%D7%99%D7%AA%20-%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%99%20%D7%A9%D7%94%D7%99%D7%94%20%D7%90%D7%A4%D7%A9%D7%A8">לבדיקת תאריך</a>
+          <p class="fine">מתאים למי שהמשפט שלו כבר ברור, ורוצה לסיים אותו מהר.</p>
+        </div>
 
         <div class="tier">
           <span class="badge">משתתף בודד</span>
           <div class="amount">990 <small>₪</small></div>
           <p class="note">כולל מע"מ, למשתתף</p>
           <ul>
-            <li>מקום בסדנה הפתוחה הקרובה</li>
-            <li>כרטיס אפיון, עשרת הכללים וריפו התבנית</li>
+            <li>מקום בסדנה הקרובה, ב-20 באוקטובר</li>
+            <li>כרטיס האפיון, עשרת הכללים וריפו התבנית</li>
             <li>מייל מעקב אישי אחרי הסדנה</li>
+            <li>אותה סדנה, אותו מהלך, במחיר של מקום אחד</li>
           </ul>
           <a class="btn cta-link" href="/api/checkout?product=workshop-build-2026-10-20" data-checkout data-product="workshop-build-2026-10-20" data-price="990" data-currency="ILS" data-seats="10">שמרו לי מקום</a>
-          <p class="fine">התשלום מראש ומבטיח את המקום. ביטול עד 48 שעות לפני מזכה בהחזר מלא.</p>
+          <p class="fine">התשלום שומר את המקום. ביטול עד 48 שעות לפני, והכסף חוזר במלואו.</p>
         </div>
 
         <div class="tier alt">
           <span class="badge">ארגון או קבוצה</span>
           <div class="amount">950 <small>₪</small></div>
-          <p class="note">כולל מע"מ, למשתתף, מ-8 משתתפים</p>
+          <p class="note">כולל מע"מ למשתתף, מ-8 משתתפים</p>
           <ul>
             <li>סדנה סגורה לצוות שלכם, אצלכם או בהרצליה</li>
-            <li>שיחת אפיון איתי שבועיים לפני, כדי שהכאבים יהיו שלכם</li>
-            <li>עובדים על נתונים אמיתיים של הארגון, לא על דוגמאות</li>
-            <li>בסיום, רשימת "הבא בתור" של כל הצוות במקום אחד</li>
+            <li>שיחה איתי שבועיים לפני, כדי שנעבוד על הכאבים שלכם</li>
+            <li>עובדים על נתונים אמיתיים שלכם, לא על דוגמאות</li>
+            <li>בסוף, רשימת "הבא בתור" של כל הצוות במקום אחד</li>
           </ul>
           <a class="btn ghost" href="mailto:ai@gr8minds.co.il?subject=%D7%A1%D7%93%D7%A0%D7%94%20%D7%90%D7%A8%D7%92%D7%95%D7%A0%D7%99%D7%AA%20-%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%99%20%D7%A9%D7%94%D7%99%D7%94%20%D7%90%D7%A4%D7%A9%D7%A8">לתיאום סדנה ארגונית</a>
-          <p class="fine">הגרסה הארגונית מתחילה בשיחה קצרה ולא בתשלום, כי בלי האפיון מראש הסדנה שווה חצי.</p>
+          <p class="fine">מתחילים בשיחה קצרה ולא בתשלום. בלי השיחה הזאת הסדנה שווה חצי.</p>
         </div>
 
       </div>
@@ -558,19 +589,19 @@
     <div class="narrow">
       <span class="eyebrow">Before you come</span>
       <h2>מה צריך להביא</h2>
-      <p class="sub">כל מה שברשימה נפתח מהדפדפן, ואנחנו שולחים מייל הכנה שבוע מראש עם הקישורים.</p>
+      <p class="sub">הכל נפתח מהדפדפן, ושבוע לפני אני שולחת מייל עם כל הקישורים.</p>
       <div class="bring">
         <ul>
-          <li><b>לפטופ טעון ומטען.</b> אי אפשר להשתתף מהטלפון</li>
-          <li><b>מנוי Claude בתשלום, Pro או Max.</b> המנוי החינמי לא מספיק לסדנה הזאת</li>
-          <li><b>חשבון GitHub וחשבון Vercel.</b> שניהם חינם, ונפתחים בשתי קליקים מהמייל שנשלח</li>
-          <li><b>משפט "הלוואי" אחד כתוב.</b> נשלח טופס קצר של ארבע שאלות, ואני מחזירה לכל אחד שורת חידוד לפני הסדנה</li>
+          <li><b>לפטופ ומטען.</b> מהטלפון אי אפשר לבנות</li>
+          <li><b>מנוי Claude בתשלום, Pro או Max.</b> החינמי ייגמר לכם באמצע</li>
+          <li><b>חשבון GitHub וחשבון Vercel.</b> שניהם חינם, ונפתחים בשני קליקים מתוך המייל</li>
+          <li><b>משפט "הלוואי" אחד כתוב.</b> ארבע שאלות קצרות בטופס, ואני מחזירה לכל אחד שורה מחודדת לפני הסדנה</li>
           <li><b>שום ידע בתכנות.</b> באמת. אתם מובילים את הבנייה, לא כותבים אותה</li>
         </ul>
       </div>
       <div class="bring" style="margin-top:18px">
         <ul>
-          <li><b>בדיקת מוכנות יומיים לפני.</b> עשר דקות, ואף אחד לא נכנס לחדר בלי סביבה שעובדת. זה מה שמאפשר להתחיל לבנות בדקה העשרים ולא בדקה השישים</li>
+          <li><b>בדיקת מוכנות יומיים לפני.</b> עשר דקות בזום, כדי שנתחיל לבנות בדקה העשרים ולא בדקה השישים</li>
         </ul>
       </div>
     </div>
@@ -607,8 +638,8 @@
 
   <div class="final sec-pink">
     <div class="narrow">
-      <h2>מה המשפט שלכם?</h2>
-      <p class="sub">שלוש שעות מהיום הוא כבר לא משפט. הוא כתובת.</p>
+      <h2>מה ה"הלוואי שהיה אפשר" שלכם?</h2>
+      <p class="sub">עוד שלוש שעות זה כבר לא משפט, אלא כתובת שאפשר לשלוח למישהו.</p>
       <a class="btn cta-link" href="/api/checkout?product=workshop-build-2026-10-20" data-checkout data-product="workshop-build-2026-10-20" data-price="990" data-currency="ILS" data-seats="10">שמרו לי מקום</a>
       <p class="btn-note">שלישי, 20 באוקטובר 2026, 09:30 עד 12:30, אריה שנקר 1 הרצליה.</p>
     </div>
