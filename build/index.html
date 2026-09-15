@@ -190,6 +190,38 @@
   .wish em b{color:var(--teal);font-weight:700}
   .after{margin-top:34px;text-align:center;font-size:1.1rem;font-weight:500;max-width:52ch;margin-inline:auto}
 
+  /* ---------- proof ---------- */
+  .proofs{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:44px}
+  .proof{flex:1 1 100%;max-width:100%}
+  @media (min-width:700px){.proof{flex:0 1 calc(50% - 9px);max-width:calc(50% - 9px)}}
+  @media (min-width:1060px){.proof{flex:0 1 calc(33.333% - 12px);max-width:calc(33.333% - 12px)}}
+  .proof{
+    display:flex;flex-direction:column;text-decoration:none;color:inherit;
+    background:var(--white);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .proof:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .proof:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+  .proof-top{
+    direction:ltr;display:flex;align-items:center;gap:6px;padding:10px 13px;
+    background:#F7F7FA;border-bottom:1px solid var(--line);
+  }
+  .proof-top i{width:7px;height:7px;border-radius:50%;background:#DCDCE4;flex:0 0 auto}
+  .proof-url{
+    flex:1;margin-inline-start:6px;background:var(--white);border:1px solid var(--line);
+    border-radius:100px;padding:3px 10px;font-family:var(--disp);font-size:10.5px;
+    color:var(--soft);text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+  }
+  .proof-body{display:flex;flex-direction:column;gap:9px;padding:22px 20px 20px;height:100%}
+  .proof-body b{font-size:1.1rem;font-weight:900;letter-spacing:-.03em}
+  .proof-body q{font-size:.95rem;font-weight:500;line-height:1.5;quotes:none;color:var(--ink)}
+  .proof-body em{font-style:normal;font-size:.88rem;color:var(--muted);font-weight:300;line-height:1.55}
+  .proof-go{
+    margin-top:auto;padding-top:14px;font-size:.88rem;font-weight:700;color:var(--pink);
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .proof-go::after{content:"\2190";font-family:var(--disp)}
+
   /* ---------- gains ---------- */
   .gains{display:grid;gap:20px;margin-top:46px;grid-template-columns:1fr}
   @media (min-width:700px){.gains{grid-template-columns:1fr 1fr}}
@@ -389,7 +421,83 @@
         <em>בסדנה: <b>עמוד שמעלים אליו קובץ</b></em>
       </div>
     </div>
-    <p class="after">לכל אחד מהמשפטים האלה יש כלי קטן שפותר אותו. פשוט אף אחד עוד לא בנה אותו.</p>
+    <p class="after">לכל אחד מהמשפטים האלה יש כלי קטן שפותר אותו. השאלה היחידה היא מי בונה אותו.</p>
+  </div>
+</section>
+
+<section class="band-teal">
+  <div class="wrap">
+    <div class="lead">
+      <span class="kick">Proof</span>
+      <h2>כלים שנבנו בדיוק ככה</h2>
+      <p>שבעה כלים שכל אחד מהם התחיל ממשפט אחד. כולם חיים באוויר עכשיו, ואפשר להיכנס ולראות.</p>
+    </div>
+    <div class="proofs">
+      <a class="proof" href="https://virtual-user-research.vercel.app/" target="_blank" rel="noopener">
+        <span class="proof-top"><i></i><i></i><i></i><span class="proof-url">virtual-user-research.vercel.app</span></span>
+        <span class="proof-body">
+          <b>שולחן עגול</b>
+          <q>"הלוואי שהיה אפשר לשאול את המשתמשים שלי למה הם נוטשים, בלי לגייס אף אחד לראיונות."</q>
+          <em>מדביקים כתובת של מוצר ושואלים שאלה אחת. הכלי בונה פרסונות, מראיין כל אחת לעומק ומחזיר דוח.</em>
+          <span class="proof-go">לכלי החי</span>
+        </span>
+      </a>
+      <a class="proof" href="https://pipeline.gr8minds.co.il/" target="_blank" rel="noopener">
+        <span class="proof-top"><i></i><i></i><i></i><span class="proof-url">pipeline.gr8minds.co.il</span></span>
+        <span class="proof-body">
+          <b>Triage</b>
+          <q>"הלוואי שהיה אפשר לדעת מי בשוק שלי בשל לשיחה דווקא השבוע."</q>
+          <em>סורק את השוק כל יום, מאתר חברות שקרה אצלן משהו שהופך אותן ללקוח, וחוקר כל אחת עד לאיש הקשר.</em>
+          <span class="proof-go">לכלי החי</span>
+        </span>
+      </a>
+      <a class="proof" href="https://competitor-radar-theta.vercel.app/" target="_blank" rel="noopener">
+        <span class="proof-top"><i></i><i></i><i></i><span class="proof-url">competitor-radar-theta.vercel.app</span></span>
+        <span class="proof-body">
+          <b>מכ"ם מתחרים</b>
+          <q>"הלוואי שהיה אפשר לדעת מה המתחרים שלי מריצים באוויר עכשיו."</q>
+          <em>מזהה מתחרים ואוסף קמפיינים, כתבות, גיוסים וטריגרים, עם מקור בדוק לכל עובדה.</em>
+          <span class="proof-go">לכלי החי</span>
+        </span>
+      </a>
+      <a class="proof" href="https://aman-pitch.vercel.app/" target="_blank" rel="noopener">
+        <span class="proof-top"><i></i><i></i><i></i><span class="proof-url">aman-pitch.vercel.app</span></span>
+        <span class="proof-body">
+          <b>סקירה דיגיטלית</b>
+          <q>"הלוואי שהיה אפשר לקבל חוות דעת על המוצר הדיגיטלי שלי בלי להזמין ייעוץ."</q>
+          <em>מכניסים כתובת אתר ומקבלים סקירה: מה נמצא בפועל, שלושה כיוונים, ואיך ממשיכים מכאן.</em>
+          <span class="proof-go">לכלי החי</span>
+        </span>
+      </a>
+      <a class="proof" href="https://gr8minds-geo-audit.vercel.app/" target="_blank" rel="noopener">
+        <span class="proof-top"><i></i><i></i><i></i><span class="proof-url">gr8minds-geo-audit.vercel.app</span></span>
+        <span class="proof-body">
+          <b>GEO Audit</b>
+          <q>"הלוואי שהיה אפשר לדעת אם Claude ו-ChatGPT בכלל ממליצים עליי."</q>
+          <em>בודק את הנראות של המותג בארבעה מנועי AI, נותן ציון לכל אחד ומייצא דוח.</em>
+          <span class="proof-go">לכלי החי</span>
+        </span>
+      </a>
+      <a class="proof" href="https://idea-to-product-studio-fawn.vercel.app/" target="_blank" rel="noopener">
+        <span class="proof-top"><i></i><i></i><i></i><span class="proof-url">idea-to-product-studio-fawn.vercel.app</span></span>
+        <span class="proof-body">
+          <b>Idea to Product Studio</b>
+          <q>"הלוואי שהיה אפשר להחליט איזה רעיון לבנות קודם, בלי ויכוח בחדר."</q>
+          <em>מנקד כל רעיון מול שמונה קריטריונים משוקללים, מדרג לפי עדיפות, ומסמן רעיונות שחופפים זה לזה.</em>
+          <span class="proof-go">לכלי החי</span>
+        </span>
+      </a>
+      <a class="proof" href="https://subscan-two.vercel.app/" target="_blank" rel="noopener">
+        <span class="proof-top"><i></i><i></i><i></i><span class="proof-url">subscan-two.vercel.app</span></span>
+        <span class="proof-body">
+          <b>subscan</b>
+          <q>"הלוואי שהיה אפשר לדעת על אילו מנויי תוכנה אני משלם ולא משתמש."</q>
+          <em>גוררים קובץ פירוט אשראי ומקבלים את רשימת המנויים ותוכנית ביטול. הקובץ לא יוצא מהדפדפן.</em>
+          <span class="proof-go">לכלי החי</span>
+        </span>
+      </a>
+    </div>
+    <p class="after">אף אחד מהם לא נבנה על ידי צוות פיתוח. זו אותה שיטה שאתם לומדים בשלוש השעות.</p>
   </div>
 </section>
 
@@ -454,7 +562,7 @@
   </div>
 </section>
 
-<section class="band-teal">
+<section>
   <div class="wrap">
     <div class="lead">
       <span class="kick">Who it is for</span>
