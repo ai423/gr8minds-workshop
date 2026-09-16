@@ -110,7 +110,25 @@
   @media (max-width:760px){.bar .d-lg{display:none}.bar .d-sm{display:inline}}
 
   /* ---------- hero ---------- */
-  .hero{background:linear-gradient(180deg,var(--tint-pink) 0%,var(--white) 100%);overflow:hidden}
+  .hero{position:relative;background:linear-gradient(180deg,var(--tint-pink) 0%,var(--white) 100%);overflow:hidden}
+  .blobs{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform}
+  .blob.a{width:46vw;height:46vw;max-width:620px;max-height:620px;top:-12%;right:-10%;
+    background:radial-gradient(circle,rgba(255,31,142,.38),rgba(255,31,142,0) 70%);
+    animation:drift-a 34s ease-in-out infinite alternate}
+  .blob.b{width:40vw;height:40vw;max-width:540px;max-height:540px;bottom:-16%;left:-10%;
+    background:radial-gradient(circle,rgba(245,200,66,.44),rgba(245,200,66,0) 70%);
+    animation:drift-b 44s ease-in-out infinite alternate}
+  .blob.c{width:32vw;height:32vw;max-width:430px;max-height:430px;top:30%;left:26%;
+    background:radial-gradient(circle,rgba(34,167,175,.30),rgba(34,167,175,0) 70%);
+    animation:drift-c 52s ease-in-out infinite alternate}
+  @keyframes drift-a{from{transform:translate3d(0,0,0) scale(1)}
+    to{transform:translate3d(-7%,9%,0) scale(1.14)}}
+  @keyframes drift-b{from{transform:translate3d(0,0,0) scale(1)}
+    to{transform:translate3d(9%,-7%,0) scale(1.1)}}
+  @keyframes drift-c{from{transform:translate3d(0,0,0) scale(1)}
+    to{transform:translate3d(6%,-10%,0) scale(.88)}}
+  .hero-in{position:relative;z-index:1}
   .hero-in{
     display:grid;gap:clamp(36px,5vw,64px);align-items:center;
     padding-top:clamp(48px,6vw,76px);padding-bottom:clamp(56px,7vw,86px);
@@ -165,11 +183,22 @@
     display:flex;align-items:center;justify-content:space-between;gap:10px;
     padding:11px 0;border-bottom:1px solid var(--line);font-size:.9rem;
   }
-  .m-row span{font-weight:500}
-  .m-row b{font-family:var(--disp);font-weight:600}
-  .m-row i{font-style:normal;font-size:.76rem;color:var(--white);background:var(--pink);
-    border-radius:100px;padding:3px 9px;font-weight:700;white-space:nowrap}
+  .m-row span{font-weight:500;line-height:1.45}
+  .m-row i{font-style:normal;font-size:.74rem;color:var(--white);background:var(--pink);
+    border-radius:100px;padding:3px 10px;font-weight:700;white-space:nowrap;flex:0 0 auto}
   .m-row i.ok{background:var(--teal)}
+  .m-row i.new{background:#C99A19}
+  .m-live{
+    display:flex;align-items:center;gap:8px;margin-top:14px;
+    font-size:.8rem;color:var(--soft);font-weight:300;
+  }
+  .pulse{width:8px;height:8px;border-radius:50%;background:var(--teal);flex:0 0 auto;
+    box-shadow:0 0 0 0 rgba(34,167,175,.55);animation:pulse 2.6s ease-out infinite}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(34,167,175,.5)}
+    70%{box-shadow:0 0 0 9px rgba(34,167,175,0)}
+    100%{box-shadow:0 0 0 0 rgba(34,167,175,0)}
+  }
   .m-btn{
     margin-top:18px;background:var(--grad);color:var(--white);text-align:center;
     border-radius:100px;padding:11px;font-weight:700;font-size:.92rem;
@@ -336,8 +365,24 @@
   .faq p{padding:0 0 24px;color:var(--muted);font-weight:300;font-size:.98rem}
 
   /* ---------- final ---------- */
-  .final{background:var(--ink);color:var(--white);text-align:center;
-    padding:clamp(72px,10vw,120px) 0}
+  .final{position:relative;overflow:hidden;background:var(--ink);color:var(--white);
+    text-align:center;padding:clamp(72px,10vw,120px) 0}
+  .final .glow{
+    position:absolute;top:50%;left:50%;width:120vw;height:120vw;max-width:1100px;max-height:1100px;
+    transform:translate(-50%,-50%);pointer-events:none;
+    background:radial-gradient(circle,rgba(255,31,142,.30),rgba(255,31,142,0) 62%);
+    animation:breathe 16s ease-in-out infinite alternate;will-change:transform,opacity;
+  }
+  .final .narrow{position:relative;z-index:1}
+  @keyframes breathe{
+    from{transform:translate(-50%,-50%) scale(.82);opacity:.65}
+    to{transform:translate(-50%,-50%) scale(1.15);opacity:1}
+  }
+
+  /* Anyone who asked their system for less motion gets a still page. */
+  @media (prefers-reduced-motion:reduce){
+    .blob,.final .glow,.pulse,.proof{animation:none!important;transition:none!important}
+  }
   .final h2{font-size:clamp(1.9rem,4.6vw,3.1rem);max-width:18ch;margin:0 auto}
   .final p.s{margin-top:18px;color:rgba(255,255,255,.7);font-weight:300}
   .final .btn{margin-top:34px}
@@ -361,6 +406,7 @@
 </div>
 
 <div class="hero">
+  <div class="blobs" aria-hidden="true"><span class="blob a"></span><span class="blob b"></span><span class="blob c"></span></div>
   <div class="wrap hero-in">
     <div>
       <span class="kick">Build Workshop &middot; Herzliya</span>
@@ -388,11 +434,12 @@
         </div>
         <div class="mock-body">
           <p class="m-kick">הכלי שבניתם</p>
-          <h4>מי עוד לא שילם</h4>
-          <div class="m-row"><span>אלפא בע"מ</span><b>12,400 ₪</b><i>איחור 9 ימים</i></div>
-          <div class="m-row"><span>בטא שיווק</span><b>3,180 ₪</b><i>איחור 4 ימים</i></div>
-          <div class="m-row"><span>גמא טכנולוגיות</span><b>7,900 ₪</b><i class="ok">שולם</i></div>
-          <div class="m-btn">שליחת תזכורות</div>
+          <h4>הבוקר שלי &middot; יום שלישי</h4>
+          <div class="m-row"><span>ההצעה שיצאה ביום ראשון נפתחה 3 פעמים אתמול</span><i>חם</i></div>
+          <div class="m-row"><span>שני לידים מהאתר עוד לא קיבלו מענה</span><i class="new">חדש</i></div>
+          <div class="m-row"><span>פגישה עם אלפא, תקציר של שלוש שורות מוכן</span><i class="ok">11:00</i></div>
+          <div class="m-btn">פתחו את הבוקר</div>
+          <p class="m-live"><span class="pulse"></span>רץ לבד כל יום ב-07:00</p>
         </div>
       </div>
       <p class="mock-note">זה מה שיוצא מהחדר. כלי אחד, שלכם, בכתובת שלכם.</p>
@@ -688,6 +735,7 @@
 </section>
 
 <div class="final">
+  <span class="glow" aria-hidden="true"></span>
   <div class="narrow">
     <h2>מה ה"הלוואי שהיה אפשר" שלכם?</h2>
     <p class="s">עוד שלוש שעות זה כבר לא משפט, אלא כתובת שאפשר לשלוח.</p>
