@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Heebo:wght@300;400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/checkout.css">
@@ -53,6 +53,7 @@
     --shadow:0 24px 60px -24px rgba(15,15,30,.18);
     --shadow-sm:0 2px 6px rgba(15,15,30,.06);
     --disp:"Space Grotesk","Heebo",system-ui,sans-serif;
+    --hand:"Caveat","Space Grotesk",cursive;
     --body:"Heebo","Space Grotesk",system-ui,sans-serif;
   }
   *{box-sizing:border-box}
@@ -99,6 +100,10 @@
     padding:11px 0;font-size:.92rem;
   }
   .bar-in{display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .bar .brand{font-family:var(--disp);font-weight:700;font-size:1.02rem;letter-spacing:.03em;
+    direction:ltr;flex:0 0 auto;color:var(--white)}
+  .bar .brand i{font-style:normal;color:var(--pink)}
+  @media (max-width:880px){.bar .brand{display:none}}
   .bar b{font-weight:700}
   .bar .d-sm{display:none}
   .bar .when{font-weight:300;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -136,7 +141,24 @@
   @media (min-width:1000px){.hero-in{grid-template-columns:1.06fr .94fr;
     min-height:calc(100svh - 46px);padding-top:40px;padding-bottom:48px}}
   @media (min-width:1000px) and (max-height:760px){.hero-in{min-height:0}}
+  .hero-copy{max-width:600px}
+  .swash{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;
+    font-size:.95rem;font-weight:500;color:var(--muted);
+  }
+  .swash span{
+    background:#FFC4DF;color:#B3155F;font-weight:900;font-size:1.02rem;
+    padding:5px 16px;border-radius:62% 38% 56% 44% / 58% 56% 44% 42%;
+    transform:rotate(-1.4deg);display:inline-block;
+  }
   h1{font-size:clamp(2.6rem,6.4vw,4.5rem)}
+  .underline{display:block;width:min(340px,78%);height:14px;margin:10px 0 0;overflow:visible}
+  .underline path{fill:none;stroke:var(--pink);stroke-width:5;stroke-linecap:round}
+  .tagline{
+    margin-top:22px;font-size:clamp(1.15rem,2.1vw,1.5rem);font-weight:700;
+    letter-spacing:-.03em;line-height:1.3;
+  }
+  .tagline .now{display:block;margin-top:4px;font-weight:700;color:var(--pink);font-size:.88em}
   h1 .grad{
     display:inline-block;background:var(--grad);
     -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -150,16 +172,36 @@
     color:var(--muted);font-weight:300;
   }
   .hero .lede b{color:var(--ink);font-weight:700}
-  .facts{display:grid;gap:10px;margin-top:26px;max-width:470px;grid-template-columns:1fr}
-  @media (min-width:370px){.facts{grid-template-columns:1fr 1fr}}
-  @media (max-width:520px){.facts span{padding:8px 12px;font-size:.84rem;gap:6px}}
-  .facts span{
-    display:flex;align-items:center;gap:8px;background:var(--white);
-    border:1px solid var(--line);border-radius:100px;padding:8px 16px;
-    font-size:.9rem;font-weight:500;box-shadow:var(--shadow-sm);
+  .when-row{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:20px 0;margin-top:30px;max-width:560px;
+    background:var(--white);border:1px solid var(--line);border-radius:18px;
+    padding:22px 8px;box-shadow:var(--shadow-sm);
   }
-  .facts span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pink);flex:0 0 auto}
+  @media (min-width:600px){.when-row{grid-template-columns:repeat(4,1fr);gap:0}}
+  .when-row > div{
+    display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;padding:0 10px;
+  }
+  .when-row > div + div{border-inline-start:1px solid var(--line)}
+  @media (max-width:599px){.when-row > div:nth-child(odd){border-inline-start:none}}
+  .when-row svg{width:26px;height:26px;color:var(--pink)}
+  .when-row b{font-size:.86rem;font-weight:700;line-height:1.45}
   .hero-cta{margin-top:30px}
+  .btn.big{font-size:1.12rem;padding:18px 40px}
+  @media (max-width:480px){.btn.big{font-size:1rem;padding:16px 22px}}
+  .hero .note{max-width:46ch}
+  .hand{
+    font-family:var(--hand);font-size:1.6rem;font-weight:700;color:var(--pink);
+    line-height:1.05;text-align:center;margin-top:20px;direction:ltr;transform:rotate(-2deg);
+  }
+
+  /* ---------- flyer strip ---------- */
+  .strip{background:var(--ink);color:var(--white);padding:14px 0}
+  .strip .wrap{direction:ltr;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 0}
+  .strip span{
+    font-family:var(--disp);font-size:.72rem;font-weight:600;letter-spacing:.26em;
+    text-transform:uppercase;padding:0 clamp(14px,3vw,34px);
+  }
+  .strip span + span{border-inline-start:1px solid rgba(255,255,255,.28)}
 
   /* ---------- the browser mock ---------- */
   .mock{
@@ -400,6 +442,7 @@
 
 <div class="bar">
   <div class="wrap bar-in">
+    <span class="brand">GR<i>8</i>MINDS</span>
     <p class="when"><b>סדנת בנייה</b><span class="d-lg"> &middot; שלישי 20.10, 09:30&ndash;12:30 &middot; הרצליה, 10 מקומות</span><span class="d-sm"> &middot; 20.10, הרצליה</span></p>
     <a href="/api/checkout?product=workshop-build-2026-10-20" data-checkout data-product="workshop-build-2026-10-20" data-price="990" data-currency="ILS" data-seats="10">שמרו לי מקום</a>
   </div>
@@ -408,21 +451,33 @@
 <div class="hero">
   <div class="blobs" aria-hidden="true"><span class="blob a"></span><span class="blob b"></span><span class="blob c"></span></div>
   <div class="wrap hero-in">
-    <div>
-      <span class="kick">Build Workshop &middot; Herzliya</span>
-      <h1>הלוואי<br><span class="grad">שהיה אפשר.</span>
-        <span class="h1-sub">עכשיו אפשר.</span>
-      </h1>
-      <p class="lede">סדנה פרונטלית של שלוש שעות. מגיעים עם משפט אחד שמעצבן אתכם כל שבוע, ויוצאים עם <b>כלי עובד בכתובת אינטרנט משלכם</b>. הכל מהדפדפן, בלי ידע בתכנות.</p>
-      <div class="facts">
-        <span>שלישי, 20 באוקטובר</span>
-        <span>09:30&ndash;12:30</span>
-        <span>אריה שנקר 1, הרצליה</span>
-        <span>10 מקומות</span>
+    <div class="hero-copy">
+      <p class="swash"><span>סדנת בנייה</span> שלוש שעות &middot; הרצליה</p>
+      <h1>"הלוואי<br><span class="grad">שהיה אפשר..."</span></h1>
+      <svg class="underline" viewBox="0 0 300 14" aria-hidden="true" preserveAspectRatio="none"><path d="M4 9C58 3 118 11 172 6c42-4 84 2 124-1"/></svg>
+      <p class="tagline">מרעיונות גדולים לפתרונות אמיתיים<span class="now">עכשיו אפשר.</span></p>
+      <p class="lede">מגיעים עם משפט אחד שמעצבן אתכם כל שבוע, ויוצאים אחרי שלוש שעות עם <b>כלי עובד בכתובת אינטרנט משלכם</b>. הכל מהדפדפן, בלי ידע בתכנות ובלי להתקין כלום.</p>
+      <div class="when-row">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+          <b>יום ג&rsquo;<br>20 באוקטובר</b>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.5l3.5 2"/></svg>
+          <b>09:30<br>עד 12:30</b>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <b>אריה שנקר 1<br>הרצליה</b>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M3 20c0-3.3 2.7-5.2 6-5.2s6 1.9 6 5.2"/><path d="M16.5 5.2a3.4 3.4 0 0 1 0 6.1M18 20c0-2.4-.8-3.9-2-4.8"/></svg>
+          <b>10 מקומות<br>בלבד</b>
+        </div>
       </div>
       <div class="hero-cta">
-        <a class="btn" href="/api/checkout?product=workshop-build-2026-10-20" data-checkout data-product="workshop-build-2026-10-20" data-price="990" data-currency="ILS" data-seats="10">שמרו לי מקום &middot; 990 ₪</a>
-        <p class="note">כולל מע"מ. לצוותים מ-8 משתתפים יש מחיר נפרד.</p>
+        <a class="btn big" href="/api/checkout?product=workshop-build-2026-10-20" data-checkout data-product="workshop-build-2026-10-20" data-price="990" data-currency="ILS" data-seats="10">בואו להפוך את זה לאמיתי &middot; 990 ₪</a>
+        <p class="note">כולל מע"מ &middot; התשלום שומר את המקום &middot; לצוותים מ-8 משתתפים יש מחיר נפרד</p>
       </div>
     </div>
 
@@ -442,9 +497,14 @@
           <p class="m-live"><span class="pulse"></span>רץ לבד כל יום ב-07:00</p>
         </div>
       </div>
+      <p class="hand">Good ideas<br>happen here</p>
       <p class="mock-note">זה מה שיוצא מהחדר. כלי אחד, שלכם, בכתובת שלכם.</p>
     </div>
   </div>
+</div>
+
+<div class="strip">
+  <div class="wrap"><span>People</span><span>Ideas</span><span>Technology</span><span>Real change</span></div>
 </div>
 
 <section>
