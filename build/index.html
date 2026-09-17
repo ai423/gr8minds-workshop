@@ -230,6 +230,52 @@
   .tier p{margin:0;font-size:16px;line-height:1.6;color:var(--body)}
   .price .fine{margin:22px 0 0;font-size:15px;color:var(--muted)}
 
+  /* ---------- live tools ---------- */
+  .live{padding:0 20px clamp(56px,9vw,104px)}
+  .live h2{margin:0 0 12px;font-size:clamp(28px,5.6vw,46px);font-weight:900}
+  .live .lede{margin:0 0 clamp(28px,4vw,44px);font-size:clamp(17px,3.6vw,20px);line-height:1.6;color:var(--body);max-width:52ch}
+  .live-grid{display:flex;flex-wrap:wrap;gap:clamp(16px,2.4vw,20px)}
+  .tool{
+    flex:1 1 100%;display:flex;flex-direction:column;gap:10px;padding:24px 22px;
+    background:#fff;border:1px solid var(--line);border-radius:18px;color:inherit;
+    transition:border-color .15s ease,transform .15s ease;
+  }
+  @media (min-width:640px){.tool{flex:0 1 calc(50% - 10px)}}
+  @media (min-width:1020px){.tool{flex:0 1 calc(33.333% - 14px)}}
+  .tool:hover{border-color:var(--pink);transform:translateY(-2px);color:inherit}
+  .tool:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+  .tool .host-name{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--soft);direction:ltr;text-align:end}
+  .tool .name{font-size:20px;font-weight:800;letter-spacing:-.02em}
+  .tool q{quotes:none;font-size:16px;font-weight:500;line-height:1.5;color:var(--dark)}
+  .tool .what{margin:0;font-size:15px;line-height:1.6;color:var(--muted)}
+  .tool .go{margin-top:auto;padding-top:6px;font-size:15px;font-weight:700;color:var(--pink)}
+
+  /* ---------- faq ---------- */
+  .faq-sec{padding:clamp(56px,9vw,104px) 20px}
+  .faq-sec h2{margin:0 0 clamp(28px,4vw,44px);font-size:clamp(30px,6vw,52px);font-weight:900}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq details:first-child{border-top:1px solid var(--line)}
+  .faq summary{
+    cursor:pointer;list-style:none;padding:20px 34px 20px 0;position:relative;
+    font-size:clamp(17px,3.6vw,21px);font-weight:700;line-height:1.5;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{
+    content:"+";position:absolute;inset-inline-end:0;top:17px;font-family:var(--mono);
+    font-size:26px;font-weight:500;color:var(--pink);line-height:1;
+  }
+  .faq details[open] summary::after{content:"\2013"}
+  .faq p{margin:0;padding:0 0 22px;font-size:17px;line-height:1.7;color:var(--body);max-width:62ch}
+
+  .tier .cta{margin-top:auto;align-self:flex-start;min-height:52px;padding:0 32px;font-size:18px}
+  .tier .enquire{
+    margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;min-height:52px;
+    padding:0 32px;border:1.5px solid var(--ink);border-radius:999px;color:var(--ink);
+    font-size:18px;font-weight:700;
+  }
+  .tier .enquire:hover{border-color:var(--pink);color:var(--pink)}
+  .tier .enquire:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
   /* ---------- register ---------- */
   .reg{padding:clamp(56px,9vw,104px) 20px;background:#fff}
   .reg h2{margin:0 0 22px;font-size:clamp(30px,6.4vw,56px);font-weight:900;line-height:1.05}
@@ -367,6 +413,50 @@
     </div>
   </section>
 
+  <section class="live">
+    <div class="w1000">
+      <h2>חמישה אייג'נטים שנבנו בדיוק ככה</h2>
+      <p class="lede">כל אחד מהם התחיל ממשפט אחד. כולם חיים באוויר וכולם פתוחים לניסיון, ממש עכשיו.</p>
+      <div class="live-grid">
+        <a class="tool" href="https://virtual-user-research.vercel.app/" target="_blank" rel="noopener">
+          <span class="host-name">virtual-user-research.vercel.app</span>
+          <span class="name">שולחן עגול</span>
+          <q>"הלוואי שהיה אפשר לשאול את המשתמשים שלי למה הם נוטשים, בלי לגייס אף אחד לראיונות."</q>
+          <span class="what">מדביקים כתובת של מוצר ושואלים שאלה אחת. בונה פרסונות, מראיין כל אחת לעומק ומחזיר דוח.</span>
+          <span class="go">לכלי החי &#8592;</span>
+        </a>
+        <a class="tool" href="https://pipeline.gr8minds.co.il/" target="_blank" rel="noopener">
+          <span class="host-name">pipeline.gr8minds.co.il</span>
+          <span class="name">Triage</span>
+          <q>"הלוואי שהיה אפשר לדעת מי בשוק שלי בשל לשיחה דווקא השבוע."</q>
+          <span class="what">סורק את השוק כל יום, מאתר חברות שקרה אצלן משהו שהופך אותן ללקוח, וחוקר כל אחת עד לאיש הקשר.</span>
+          <span class="go">לכלי החי &#8592;</span>
+        </a>
+        <a class="tool" href="https://competitor-radar-theta.vercel.app/" target="_blank" rel="noopener">
+          <span class="host-name">competitor-radar-theta.vercel.app</span>
+          <span class="name">מכ"ם מתחרים</span>
+          <q>"הלוואי שהיה אפשר לדעת מה המתחרים שלי מריצים באוויר עכשיו."</q>
+          <span class="what">מזהה מתחרים ואוסף קמפיינים, כתבות, גיוסים וטריגרים, עם מקור בדוק לכל עובדה.</span>
+          <span class="go">לכלי החי &#8592;</span>
+        </a>
+        <a class="tool" href="https://gr8minds-geo-audit.vercel.app/" target="_blank" rel="noopener">
+          <span class="host-name">gr8minds-geo-audit.vercel.app</span>
+          <span class="name">GEO Audit</span>
+          <q>"הלוואי שהיה אפשר לדעת אם Claude ו-ChatGPT בכלל ממליצים עליי."</q>
+          <span class="what">בודק את הנראות של המותג בארבעה מנועי AI, נותן ציון לכל אחד ומייצא דוח.</span>
+          <span class="go">לכלי החי &#8592;</span>
+        </a>
+        <a class="tool" href="https://subscan-two.vercel.app/" target="_blank" rel="noopener">
+          <span class="host-name">subscan-two.vercel.app</span>
+          <span class="name">subscan</span>
+          <q>"הלוואי שהיה אפשר לדעת על אילו מנויי תוכנה אני משלם ולא משתמש."</q>
+          <span class="what">גוררים קובץ פירוט אשראי ומקבלים את רשימת המנויים ותוכנית ביטול. הקובץ לא יוצא מהדפדפן.</span>
+          <span class="go">לכלי החי &#8592;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="fit">
     <div class="w1000 fit-grid">
       <div>
@@ -438,6 +528,7 @@
           <div class="amount"><b>990</b><span>ש"ח לאדם</span></div>
           <div class="vat">כולל מע"מ</div>
           <p>שלוש שעות, אייג'נט אחד פרוס בכתובת שלכם, ומייל מעקב אישי אחרי הסדנה.</p>
+          <a class="cta" href="/api/checkout?product=workshop-build-2026-10-20" data-checkout data-product="workshop-build-2026-10-20" data-price="990" data-currency="ILS" data-seats="10">שריינו מקום</a>
         </div>
         <div class="tier team">
           <div class="head">
@@ -447,9 +538,38 @@
           <div class="amount"><b>950</b><span>ש"ח לאדם</span></div>
           <div class="vat">כולל מע"מ</div>
           <p>אותה סדנה, לצוות שמגיע יחד. אפשר גם גרסה סגורה עם אינטייק מראש.</p>
+          <a class="enquire" href="mailto:lee@gr8minds.co.il?subject=%D7%A1%D7%93%D7%A0%D7%94%20%D7%9C%D7%A6%D7%95%D7%95%D7%AA">דברו איתנו</a>
         </div>
       </div>
       <p class="fine">תשלום בכרטיס אשראי בהרשמה. <span class="en">10</span> מקומות בסדנה.</p>
+    </div>
+  </section>
+
+  <section class="faq-sec">
+    <div class="w860">
+      <h2>שאלות שנשאלות</h2>
+      <div class="faq">
+        <details>
+          <summary>אני לא יודע לתכנת. באמת אצא עם משהו שעובד?</summary>
+          <p>כן, וזו כל הנקודה. אתם לא כותבים קוד אלא מובילים את הבנייה: מבקשים דבר אחד בכל פעם, בודקים בכתובת, ומתקנים. דף הכללים והפרומפטים מחולקים מודפסים.</p>
+        </details>
+        <details>
+          <summary>מה בדיוק אפשר לבנות בשלוש שעות?</summary>
+          <p>אייג'נט שעושה דבר אחד. למשל כזה שעובר כל בוקר על ההצעות הפתוחות ומחזיר את התקועות, או כזה שמסכם את הפניות מהאתר לפני ישיבת הצוות. מה שלא נכנס נרשם ב"הבא בתור", ואתם ממשיכים לבד.</p>
+        </details>
+        <details>
+          <summary>האייג'נט נשאר שלי אחרי הסדנה?</summary>
+          <p>הכל שלכם: הקוד בחשבון <span class="en">GitHub</span> שלכם, האייג'נט בכתובת שלכם, וגם אם לא תיגעו בו יותר הוא ימשיך לרוץ. שום דבר לא נשאר אצלי.</p>
+        </details>
+        <details>
+          <summary>אנחנו צוות של <span class="en">12</span>. עדיף גרסה סגורה?</summary>
+          <p>כן, ובפער גדול. נפגשים לאינטייק לפני, אני מגיעה עם הכאבים שלכם מחודדים, ועובדים על נתונים אמיתיים שלכם. מ-<span class="en">8</span> משתתפים המחיר <span class="en">950</span> לאדם.</p>
+        </details>
+        <details>
+          <summary>יש עלויות נוספות חוץ ממחיר הסדנה?</summary>
+          <p>מנוי <span class="en">Claude Pro</span>, שרובכם כבר משלמים עליו. <span class="en">GitHub</span> ו-<span class="en">Vercel</span> חינם ברמה שהסדנה צריכה, והאייג'נט שתבנו ימשיך לרוץ בחינם.</p>
+        </details>
+      </div>
     </div>
   </section>
 
